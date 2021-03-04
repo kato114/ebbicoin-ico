@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Ebbicoin</title>
+		<base href="/" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href="/assets/user/img/logo-36x36.png" />
+	</head>
+	<body>
+		<app-root></app-root>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.3.3/web3.min.js"></script>
+		<script>
+			let accounts
+
+			async function getGasPrices() {
+				let response = await axios.get('https://ethgasstation.info/json/ethgasAPI.json')
+				let prices = {
+					low: response.data.safeLow * 100000000,
+					medium: response.data.average * 100000000,
+					high: response.data.fast * 100000000,
+				}
+				return prices
+			}
+
+			async function connetWallet() {
+				accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+
+				if (accounts[0] !== undefined) {
+					$('#btn_price').removeClass('d-none')
+					$('#btn_mask').addClass('d-none')
+				}
+			}
+
+			async function sendEthereum(amount) {
+				let gasPrices = await getGasPrices()
+
+				let eth_rate = localStorage.getItem('eth_rate')
+				let eth_address = localStorage.getItem('eth_address')
+
+				let real_amount = amount / eth_rate
+				let weiValue = Web3.utils.toHex(Web3.utils.toWei(real_amount.toString(), 'ether'))
+
+				ethereum
+					.request({
+						method: 'eth_sendTransaction',
+						params: [
+							{
+								from: accounts[0],
+								to: eth_address,
+								value: weiValue,
+								gasPrice: Web3.utils.toHex(gasPrices.medium),
+								gas: Web3.utils.toHex('21000'),
+								chainId: 1,
+							},
+						],
+					})
+					.then((txHash) => console.log(txHash))
+					.catch((error) => console.error)
+			}
+
+			ethereum.on('accountsChanged', function (caccounts) {
+				accounts = caccounts
+			})
+		</script>
+	</body>
+</html>

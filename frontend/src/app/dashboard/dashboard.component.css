@@ -1,0 +1,39 @@
+#ExchangeModal .ETH {
+	font-size: 6rem;
+}
+
+.Get-diposite {
+	padding: 28px 14px 14px;
+	border-top: 1px solid #e1e1e1;
+	margin-top: 19px;
+}
+
+.Get-diposite button {
+	margin-right: 0;
+	padding: 7px 12px;
+}
+
+.btn-update[disabled='disabled']:hover {
+	color: #7ac29a;
+}
+
+@media only screen and (max-width: 767px) {
+	.send-eth-addr {
+		text-align: left !important;
+	}
+	.progress-bar-wrapper h4 {
+		text-align: center;
+		margin-bottom: 1rem !important;
+	}
+	.progress-bar-wrapper .progress-bar-start-text {
+		text-align: center;
+	}
+}
+
+tr.active td {
+	background-color: #c6c6c6 !important;
+}
+
+.d-none {
+	display: none;
+}

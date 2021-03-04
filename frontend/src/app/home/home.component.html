@@ -1,0 +1,838 @@
+<header class="header">
+	<nav class="navbar navbar-default navbar-fixed-top opaque">
+		<div class="container">
+			<div class="navbar-header">
+				<button data-target="#navbar-collapse-02" data-toggle="collapse" class="navbar-toggle" type="button">
+					<span class="sr-only">Toggle navigation</span>
+					<img src="/assets/images/user-toggle-icon.png" alt="Toggle Navigation" />
+				</button>
+				<a href="javascript:void(0);" class="navbar-brand brand scroll"><img src="/assets/images/header-logo.png" alt="logo" /></a>
+			</div>
+			<div id="navbar-collapse-02" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="nav-home"><a (click)="scroll(home_wrapper)" href="javascript:void(0)" class="scroll">HOME</a></li>
+					<li class="nav-road"><a (click)="scroll(roadmap)" href="javascript:void(0)" class="scroll">ROADMAP</a></li>
+					<li><a href="/assets/whitepaper.pdf" title="White Paper" target="_blank">WHITEPAPER</a></li>
+					<li class="nav-exchange"><a href="javascript:void(0)" (click)="showExchangeModal()">EXCHANGE</a></li>
+					<li class="nav-affiliate"><a (click)="scroll(affiliate)" href="javascript:void(0)" class="scroll">AFFILIATE</a></li>
+					<li><a href="javascript:void(0)" data-toggle="modal" data-target="#login-modal" class="purchase btn-sign-up text-center">Participate In ICO</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+	<div class="modal-dialog">
+		<div>
+			<div class="content" style="margin: 21% auto auto; background: rgb(255, 255, 255) none repeat scroll 0% 0%; width: 407px; padding: 21px; border: 4px solid rgb(238, 164, 58)">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<div class="">
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="login-block" *ngIf="this.login == true">
+								<form #login="ngForm" (ngSubmit)="loginSubmit(login.value)" [formGroup]="loginForm" id="form-register" method="post" action="#" novalidate>
+									<div class="card" data-background="color" data-color="blue">
+										<div class="card-header">
+											<h3 class="card-title" style="color: rgb(238, 164, 58)">Login</h3>
+										</div>
+										<div class="card-content">
+											<p [innerHTML]="this.loginResponseText"></p>
+											<div class="form-group" [ngClass]="displayFieldCss('username', loginForm)">
+												<label class="control-label">
+													Username
+													<span>*</span>
+												</label>
+												<input class="form-control" name="username" placeholder="Enter username" style="border-radius: 0px" type="text" formControlName="username" />
+												<app-field-error-display [displayError]="isFieldValid('username', loginForm)" errorMsg="Please enter username"></app-field-error-display>
+											</div>
+											<div class="form-group" [ngClass]="displayFieldCss('password', loginForm)">
+												<label class="control-label">
+													Password
+													<span>*</span>
+												</label>
+												<input class="form-control" name="password" placeholder="Password" style="border-radius: 0px" type="password" formControlName="password" />
+												<app-field-error-display [displayError]="isFieldValid('password', loginForm)" errorMsg="Please enter password"></app-field-error-display>
+											</div>
+											<div class="form-group">
+												<label class="control-label">
+													Two-Factor Authentication
+													<span>*</span>
+												</label>
+												<input class="form-control" name="tfa_key" placeholder="2FA Code (If you enabled 2FA)" style="border-radius: 0px" type="text" formControlName="tfa_key" />
+											</div>
+										</div>
+										<div class="card-footer text-center">
+											<button class="btn btn-warning" type="submit">Login</button>
+											<div class="forgot margin-top-5">
+												<a href="javascript:void(0);" (click)="showRegister()" class="register-link">New to EbbiCoin?</a> |
+												<a href="javascript:void(0);" (click)="showForgotPassword()" class="frgt-pw-link">Forgot your password?</a>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div class="register-block" *ngIf="this.register == true">
+								<form #model="ngForm" (ngSubmit)="registerSubmit(model.value)" [formGroup]="registerForm" id="form-register2" method="post" action="" novalidate>
+									<div class="card-header">
+										<h3 class="card-title" style="color: rgb(238, 164, 58)">Register</h3>
+									</div>
+									<div class="card-body">
+										<p [innerHTML]="this.registerResponseText"></p>
+										<p *ngIf="this.registerStatus == 200">If you have not received the email, <a href="javascript:void(0);" (click)="resendEmail('register')">click here</a> to resend</p>
+										<div class="form-group">
+											<label class="control-label">
+												Username
+												<span>*</span>
+											</label>
+											<input class="form-control" name="username" placeholder="Enter username" style="border-radius: 0px" type="text" formControlName="username" />
+											<div class="text-danger" *ngIf="registerForm.get('username').errors && (registerForm.get('username').dirty || registerForm.get('username').touched)">
+												<p *ngIf="registerForm.get('username').errors['required']">Username can not be empty</p>
+												<p *ngIf="registerForm.get('username').errors['minlength']">Username must be 5 characters long</p>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												E-mail
+												<span>*</span>
+											</label>
+											<input class="form-control" name="email" placeholder="Email" style="border-radius: 0px" type="email" formControlName="email" />
+											<div class="text-danger" *ngIf="registerForm.get('email').errors && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+												<p *ngIf="registerForm.get('email').errors['required']">Email can not be empty</p>
+												<p *ngIf="registerForm.get('email').errors['email']">Please enter valid email address</p>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Password
+												<span>*</span>
+											</label>
+											<input class="form-control" name="password" placeholder="Password" style="border-radius: 0px" type="password" formControlName="password" />
+											<div class="text-danger" *ngIf="registerForm.get('password').errors && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+												<p *ngIf="registerForm.get('password').errors['required']">Password can not be empty</p>
+												<p *ngIf="registerForm.get('password').errors['minlength']">Password must be 5 characters long</p>
+												<!-- <p *ngIf="registerForm.get('password').errors['pattern']">Password must contain at least one capital letter, one small letter, one number and one special character</p> -->
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Confirm Password
+												<span>*</span>
+											</label>
+											<input class="form-control" name="confPassword" placeholder="Confirm Password" style="border-radius: 0px" type="password" formControlName="confPassword" />
+											<div class="text-danger" *ngIf="registerForm.get('confPassword').errors && (registerForm.get('confPassword').dirty || registerForm.get('confPassword').touched)">
+												<p *ngIf="registerForm.get('confPassword').errors['required']">Confirm Password can not be empty</p>
+												<!-- <p *ngIf="registerForm.get('confPassword').errors['pattern']">Confirm Password must contain at least one capital letter, one small letter, one number and one special character</p> -->
+												<p *ngIf="cpwd.hasError('invalid')">Confirm Password did not match with password</p>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer">
+										<button class="btn btn-warning" type="submit">Register</button>
+										<a class="pull-right" href="javascript:void(0);" (click)="showLogin()" id="login-link">Already have an account?</a>
+									</div>
+								</form>
+							</div>
+
+							<div class="forget-pw-block" *ngIf="this.forgetPwd == true">
+								<form #frgtPwd="ngForm" (ngSubmit)="frgtPwdSubmit(frgtPwd.value)" [formGroup]="frgtPwdForm" id="form-register3" method="post" action="#">
+									<div class="card" data-background="color" data-color="blue">
+										<div class="card-header">
+											<h3 class="card-title" style="color: rgb(238, 164, 58)">Forget password</h3>
+										</div>
+										<div class="card-content">
+											<p [innerHTML]="this.frgtPwdResponseText"></p>
+											<p *ngIf="this.frgtPwdStatus == 200">If you have not received the email, <a href="javascript:void(0);" (click)="resendEmail('reset')">click here</a> to resend</p>
+											<div class="form-group" [ngClass]="displayFieldCss('email', frgtPwdForm)">
+												<label class="control-label">
+													E-mail
+													<span>*</span>
+												</label>
+												<input class="form-control" name="email" placeholder="Email" style="border-radius: 0px" type="email" formControlName="email" />
+												<app-field-error-display [displayError]="isFieldValid('email', frgtPwdForm)" errorMsg="Please enter valid email"></app-field-error-display>
+											</div>
+										</div>
+										<div class="card-footer text-center">
+											<button class="btn btn-warning" type="submit">Reset</button>
+											<div class="forgot margin-top-5">
+												<a href="javascript:void(0);" (click)="showLogin()" id="login-link">Login</a>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section #home_wrapper id="home_wrapper" class="home-wrapper">
+	<video #home_video id="home_video" muted playsinline loop autoplay poster="/assets/images/home-big-bg.jpg">
+		<source src="/assets/media/header-overlay.mp4" type="video/mp4" />
+	</video>
+	<div class="gradient_overlay"></div>
+	<div class="container home-wrappe-inside">
+		<div class="row">
+			<div class="col-md-12 text-center margin-top-60">
+				<img src="/assets/images/home-big-logo.png" alt="Home" class="home-big-logo" />
+				<p class="home-text-logo">WHAT IS EBBICOIN</p>
+				<h1 class="home-title wow fadeIn" id="main-title" data-wow-delay="0.25s">EbbiCoin is the first crypto currency to harness the power of the blockchain to build an ecosystem of enterprise level products and services</h1>
+				<div class="count-tokens wow fadeIn" data-wow-delay="0.35s">
+					<!-- <div class="progresses">
+						<span class="date day-1st" style="left: 117.5px;">1st Round</span>
+						<span class="date day-2nd" style="left: 267px;">2nd Round</span>
+						<span class="date day-3rd" style="left: 416.5px;">3rd Round</span>
+						<span class="date day-4th" style="left: 566px;">4th Round</span>
+						<span class="date round-price round-1st" style="left: 42.75px;">$0.70</span>
+						<span class="date round-price round-2nd" style="left: 192.25px;">$0.80</span>
+						<span class="date round-price round-3rd" style="left: 341.75px;">$0.90</span>
+						<span class="date round-price round-4th" style="left: 491.25px;">$1.00</span>
+						<div id="progress-bar" class="progress">
+							<div class="determinate determinate-by-date" style="width: 100px;"></div>
+							<div class="determinate sold-tokens" style="width: 100px;">SOLD</div>
+						</div>
+					</div> -->
+					<div class="stats clearfix">
+						<div class="total members">
+							<span class="title">Members</span> <span>{{ this.users }}</span>
+						</div>
+						<div class="total Ebbicoin-usd">
+							<span class="title">ICO Stage</span><span>{{ this.stage }}</span>
+						</div>
+						<div class="total eth-usd">
+							<span class="title">EbbiCoin Sold</span> <span>{{ this.soldCoins }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="features">
+	<div class="section-white small-padding-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 margin-top-10 margin-bottom-30 what-is">
+					<h3 class="medium-title wow fadeIn" data-wow-delay="0.15s">ABOUT <span class="emphasis">US </span></h3>
+					<p class="wow fadeIn" data-wow-delay="0.25s">EbbiCoin was created with the desire to make a cryptocurrency that can actually be used, and not just held for speculation purposes. We see far more uses for blockchain technology than merely keeping track of the trading back and fourth of useless tokens. So we are creating an entire eco system of innovative, enterprise level products and services that any holder of EbbiCoin can actually spend their coins on.</p>
+					<p></p>
+					<p class="wow fadeIn" data-wow-delay="0.25s">We will be using the EbbiCoin blockchain as the fundamental link between all of our products and services. And as such as more products and services are released and used, the more EbbiCoin will increase in value. This partnered along with technical innovations to our blockchain technology and methodology, the ability to spend EbbiCoin at brick and mortar and online retailers, as well as a cryptocurrency exchange built directly into all EbbiCoin wallets. EbbiCoin is poised to become the only coin with measurable value, and the number one cryptocurrency for the foreseeable future.</p>
+					<a href="" data-toggle="modal" data-target="#login-modal" class="btn btn-lg btn-blue small wow fadeIn scroll" data-wow-delay="0.25s">JOIN ICO</a>
+				</div>
+				<div class="col-md-6 text-center">
+					<img src="/assets/images/feature-section.png" alt="" class="feature-img" />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section-white ico-plan" id="pricing">
+	<div class="pricing-bottom-mask"></div>
+	<div class="background-colored"></div>
+	<div class="section-grey">
+		<div class="mask"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h2 class="section-title wow fadeIn" data-wow-delay="0.15s"><span class="emphasis">Ebbicoin </span>PLATFORMS</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4 features-item wow fadeInLeft" data-wow-delay="0.25s">
+					<h3 class="features-desktop">Exchange Platform</h3>
+					<div class="icon-wrapper">
+						<i class="icon features-icon"><img src="/assets/images/advantages-1.png" alt="image" /></i>
+					</div>
+					<p class="features-mobile">Exchange Platform</p>
+					<p>A Crypto Currency Exchange Built Right Into All EbbiCoin Wallets</p>
+				</div>
+				<div class="col-sm-4 features-item wow fadeInLeft" data-wow-delay="0.30s">
+					<h3 class="features-desktop">Mobile App</h3>
+					<div class="icon-wrapper">
+						<i class="icon features-icon"><img src="/assets/images/advantages-2.png" alt="image" /></i>
+					</div>
+					<p class="features-mobile">Mobile App</p>
+					<p>Use The EbbiCoin Mobile App To Mine Coins And Transfer Coins From One Person To Another</p>
+				</div>
+				<div class="col-sm-4 features-item wow fadeInLeft" data-wow-delay="0.35s">
+					<h3 class="features-desktop">POS System</h3>
+					<div class="icon-wrapper">
+						<i class="icon features-icon"><img src="/assets/images/advantages-3.png" alt="image" /></i>
+					</div>
+					<p class="features-mobile">POS System</p>
+					<p>Wallet Integration Into Point Of Sale Systems At Participating Retailers</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2 class="section-title white wow fadeIn" data-wow-delay="0.15s">Coin PRICE</h2>
+			</div>
+		</div>
+		<div class="row pricing-row">
+			<div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-delay="0.25s">
+				<div class="pricing-box {{ this.stage == 'First Round' ? 'active' : '' }}">
+					<div class="pricing-top">
+						<p class="price"><span class="currency white">$</span> <span class="number white">.70 </span></p>
+						<span class="month white">March 3 - April 3</span>
+					</div>
+					<div class="pricing-bottom">
+						<ul>
+							<li>First Round</li>
+							<li>12,000,000</li>
+							<li>Ebbicoin Coins</li>
+						</ul>
+					</div>
+					<div class="pricing-top pricing-top-bottom">
+						<p class="price">
+							<span class="month white"><span class="emphasis">No Limit</span><span class="slim-text">Coins daily</span></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-delay="0.35s">
+				<div class="pricing-box {{ this.stage == 'Second Round' ? 'active' : '' }}">
+					<div class="pricing-top">
+						<p class="price"><span class="currency white">$</span> <span class="number white">.80 </span></p>
+						<span class="month white">April 3 – April 23</span>
+					</div>
+					<div class="pricing-bottom">
+						<ul>
+							<li>Second Round</li>
+							<li>12,000,000</li>
+							<li>Ebbicoin Coins</li>
+						</ul>
+					</div>
+					<div class="pricing-top pricing-top-bottom">
+						<p class="price">
+							<span class="month white"><span class="emphasis">No Limit</span><span class="slim-text">Coins daily</span></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-delay="0.45s">
+				<div class="pricing-box {{ this.stage == 'Third Round' ? 'active' : '' }}">
+					<div class="pricing-top">
+						<p class="price"><span class="currency white">$</span> <span class="number white">.90</span></p>
+						<span class="month white">April 23 – May 9</span>
+					</div>
+					<div class="pricing-bottom">
+						<ul>
+							<li>Third Round</li>
+							<li>12,000,000</li>
+							<li>Ebbicoin Coins</li>
+						</ul>
+					</div>
+					<div class="pricing-top pricing-top-bottom">
+						<p class="price">
+							<span class="month white"><span class="emphasis">No Limit</span><span class="slim-text">Coins daily</span></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3 col-xs-6 wow fadeInLeft" data-wow-delay="0.45s">
+				<div class="pricing-box {{ this.stage == 'Fourth Round' ? 'active' : '' }}">
+					<div class="pricing-top">
+						<p class="price"><span class="currency white">$</span> <span class="number white">1.00</span></p>
+						<span class="month white">May 10 – May 20</span>
+					</div>
+					<div class="pricing-bottom">
+						<ul>
+							<li>Final Round</li>
+							<li>12,000,000</li>
+							<li>Ebbicoin Coins</li>
+						</ul>
+					</div>
+					<div class="pricing-top pricing-top-bottom">
+						<p class="price">
+							<span class="month white"><span class="emphasis">No Limit</span><span class="slim-text">Coins daily</span></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section #roadmap class="section-white small-padding-bottom" id="roadmap">
+	<div class="roadmap-mask"></div>
+	<div class="container">
+		<div class="row margin-bottom-30">
+			<div class="col-md-12 text-center">
+				<h2 class="section-title wow fadeIn" data-wow-delay="0.15s"><span class="emphasis">Ebbicoin</span> Roadmap</h2>
+			</div>
+		</div>
+		<div class="row roadmap-items">
+			<div class="item wow clearfix slideInDown" data-wow-delay="0.3s">
+				<div class="img">
+					<img src="/assets/images/roadmap-3.png" alt="Road map" />
+					<div class="roadmap-horizontal-line"></div>
+				</div>
+				<div class="roadmap-vertical-line"></div>
+				<div class="roadmap-content">
+					<div class="date">
+						<p class="month">February</p>
+						<p class="year">2021</p>
+					</div>
+					<div class="content">Presale</div>
+				</div>
+			</div>
+			<div class="item wow clearfix slideInUp" data-wow-delay="0.35s">
+				<div class="img">
+					<img src="/assets/images/roadmap-4.png" alt="Road map" />
+					<div class="roadmap-horizontal-line"></div>
+				</div>
+				<div class="roadmap-vertical-line"></div>
+				<div class="roadmap-content">
+					<div class="date">
+						<p class="month">March</p>
+						<p class="year">2021</p>
+					</div>
+					<div class="content">Inital Coin Offering</div>
+				</div>
+			</div>
+			<div class="item wow clearfix slideInDown" data-wow-delay="0.4s">
+				<div class="img">
+					<img src="/assets/images/roadmap-5.png" alt="Road map" />
+					<div class="roadmap-horizontal-line"></div>
+				</div>
+				<div class="roadmap-vertical-line"></div>
+				<div class="roadmap-content">
+					<div class="date">
+						<p class="month">May</p>
+						<p class="year next-year">2021</p>
+					</div>
+					<div class="content">Internal Exchange platform will be launched.</div>
+				</div>
+			</div>
+			<div class="item wow clearfix slideInUp" data-wow-delay="0.45s">
+				<div class="img">
+					<img src="/assets/images/roadmap-6.png" alt="Road map" />
+					<div class="roadmap-horizontal-line"></div>
+				</div>
+				<div class="roadmap-vertical-line"></div>
+				<div class="roadmap-content">
+					<div class="date">
+						<p class="month">September</p>
+						<p class="year next-year">2021</p>
+					</div>
+					<div class="content">Mobile Application will be launched.</div>
+				</div>
+			</div>
+			<div class="item wow clearfix slideInDown" data-wow-delay="0.5s">
+				<div class="img">
+					<img src="/assets/images/roadmap-7.png" alt="Road map" />
+					<div class="roadmap-horizontal-line"></div>
+				</div>
+				<div class="roadmap-vertical-line"></div>
+				<div class="roadmap-content">
+					<div class="date">
+						<p class="month">January</p>
+						<p class="year next-year">2022</p>
+					</div>
+					<div class="content">Currency Remittance Features, tap to pay</div>
+				</div>
+			</div>
+			<div class="item wow clearfix slideInUp" data-wow-delay="0.45s">
+				<div class="img">
+					<img src="/assets/images/roadmap-8.png" alt="Road map" />
+					<div class="roadmap-horizontal-line"></div>
+				</div>
+				<div class="roadmap-vertical-line"></div>
+				<div class="roadmap-content">
+					<div class="date">
+						<p class="month">August</p>
+						<p class="year next-year">2022</p>
+					</div>
+					<div class="content">Release Hardware for brick-and-mortar payments.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--end container-->
+</section>
+
+<section #affiliate class="section-dubai small-padding-bottom" id="affiliate">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-xs-12 text-center">
+				<h2 class="section-title white wow fadeIn" data-wow-delay="0.15s">
+					<!-- <span class="emphasis">Affiliate</span> -->
+					Affiliate Program
+				</h2>
+				<div class="affiliate-levels clearfix">
+					<div class="item wow slideInUp" data-wow-delay="0.25s">
+						<div class="affiliate-line"></div>
+						<div class="affiliate-line-percent"></div>
+						<div class="clearfix"></div>
+						<div class="content">
+							<span class="level">Gen 1</span>
+							<span class="percent">10%</span>
+						</div>
+					</div>
+					<div class="item wow slideInUp" data-wow-delay="0.25s">
+						<div class="affiliate-line"></div>
+						<div class="affiliate-line-percent"></div>
+						<div class="clearfix"></div>
+						<div class="content">
+							<span class="level">Gen 2</span>
+							<span class="percent">5%</span>
+						</div>
+					</div>
+					<div class="item wow slideInUp" data-wow-delay="0.25s">
+						<div class="affiliate-line"></div>
+						<div class="affiliate-line-percent"></div>
+						<div class="clearfix"></div>
+						<div class="content">
+							<span class="level">Gen 3</span>
+							<span class="percent">2%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="fun-facts-wrapper">
+	<div class="container fun-facts-inside">
+		<div class="row">
+			<div class="fun-facts-box text-center wow fadeIn" data-wow-delay="0.15s">
+				<div class="fun-facts-image">
+					<span class="vertical-helper"></span>
+					<img src="/assets/images/funfacts-1.png" alt="$1M Seed Round" class="funfacts-1-image" />
+				</div>
+				<p class="fun-facts-title"><span class="facts-numbers">$78Mil</span><span class="facts-number-title">Total Supply</span></p>
+			</div>
+			<div class="fun-facts-box text-center wow fadeIn" data-wow-delay="0.2s">
+				<div class="fun-facts-image">
+					<span class="vertical-helper"></span>
+					<img src="/assets/images/funfacts-2.png" alt="24M Limited Supply" />
+				</div>
+				<p class="fun-facts-title"><span class="facts-numbers">48 Million</span><span class="facts-number-title">ICO Coin</span></p>
+			</div>
+			<div class="fun-facts-box text-center wow fadeIn" data-wow-delay="0.25s">
+				<div class="fun-facts-image">
+					<span class="vertical-helper"></span>
+					<img src="/assets/images/funfacts-3.png" alt="100% Secured" />
+				</div>
+				<p class="fun-facts-title"><span class="facts-numbers">100%</span><span class="facts-number-title">Secure</span></p>
+			</div>
+			<div class="fun-facts-box text-center wow fadeIn" data-wow-delay="0.3s">
+				<div class="fun-facts-image">
+					<span class="vertical-helper"></span>
+					<img src="/assets/images/funfacts-4.png" alt="99.9% Uptime Guarantee" />
+				</div>
+				<p class="fun-facts-title"><span class="facts-numbers">100% </span><span class="facts-number-title">Uptime</span></p>
+			</div>
+			<div class="fun-facts-box text-center wow fadeIn" data-wow-delay="0.35s">
+				<div class="fun-facts-image">
+					<span class="vertical-helper"></span>
+					<img src="/assets/images/funfacts-5.png" alt="24/7 Fast Support" />
+				</div>
+				<p class="fun-facts-title"><span class="facts-numbers">24/7</span><span class="facts-number-title">Support</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section class="section-grey features-background">
+	<div class="container-blur"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-12">
+				<h2 class="section-title wow fadeIn" data-wow-delay="0.15s" style="text-align: center">EbbiCoin</h2>
+				<div class="features-title-log">
+					<img src="/assets/images/features-title-logo.png" alt="" />
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-12 features-items">
+				<div class="item clearfix wow slideInLeft" data-wow-delay="0.2s">
+					<div class="features-image">
+						<img src="/assets/images/gambling.png" alt="Gambling" />
+					</div>
+					<div class="features-description">
+						<p class="head">Purchases</p>
+						<p class="content">Physical & Digital Shopping</p>
+					</div>
+				</div>
+				<div class="item clearfix wow slideInLeft" data-wow-delay="0.35s">
+					<div class="features-image">
+						<img src="/assets/images/trading.png" alt="Trading" />
+					</div>
+					<div class="features-description">
+						<p class="head">Trading</p>
+						<p class="content">Lowest fee 1%</p>
+					</div>
+				</div>
+				<div class="item clearfix wow slideInLeft" data-wow-delay="0.25s">
+					<div class="features-image">
+						<img src="/assets/images/lottery.png" alt="Lottery" />
+					</div>
+					<div class="features-description">
+						<p class="head">Transfers</p>
+						<p class="content">EbbiCoins & Fiat</p>
+					</div>
+				</div>
+				<div class="item clearfix wow slideInLeft" data-wow-delay="0.3s">
+					<div class="features-image">
+						<img src="/assets/images/mining.png" alt="Mining" />
+					</div>
+					<div class="features-description">
+						<p class="head">Mining</p>
+						<p class="content">GPU hardware</p>
+					</div>
+				</div>
+				<div class="item clearfix wow slideInLeft" data-wow-delay="0.4s">
+					<div class="features-image">
+						<img src="/assets/images/lending.png" alt="Lending" />
+					</div>
+					<div class="features-description">
+						<p class="head">Staking</p>
+						<p class="content">Earn Free EbbiCoin</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section-white portfolio-padding section-wallet-card" id="portfolio">
+	<div class="portfolio-mask"></div>
+	<div class="container">
+		<div class="row wow fadeIn vertical-center" data-wow-delay="0.15s">
+			<div class="col-sm-6 col-xs-12 text-center">
+				<h2 class="section-title wallet"><span class="emphasis">EbbiCoin Wallet and Mobile App</span></h2>
+				<p class="section-subtitle">
+					Our IT team is working to launch EbbiCoin Wallet on IOS and Android.<br />
+					Release Date: September 2021
+				</p>
+				<p class="section-subtitle">
+					Were working with partners and banks to integrate with all major tap to pay providers<br />
+					Deployment Date: December 2021
+				</p>
+			</div>
+			<div class="col-sm-6 col-xs-12 text-center mobile-app">
+				<img src="/assets/images/ios-card.png" class="width-50" alt="Jgen-coin" />
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="services" class="section-wallet-card">
+	<div class="section-white">
+		<div class="container">
+			<div class="row margin-bottom-30 vertical-center">
+				<div class="col-sm-6 col-xs-12 iMac-desktop wow fadeIn" data-wow-delay="0.15s">
+					<img src="/assets/images/imac.png" class="" alt="imac" />
+				</div>
+				<div class="col-sm-6 col-xs-12 text-center mac-system-full-width">
+					<h2 class="section-title wow fadeIn leader" data-wow-delay="0.15s"><span class="emphasis">EbbiCoin Innovations</span></h2>
+					<div class="image-imac iMac-mobile">
+						<img src="/assets/images/imac.png" class="" alt="imac" />
+					</div>
+					<div class="leader-content">
+						<div class="services-item wow fadeIn" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.3s; animation-name: none">
+							<div class="services-text">
+								<h4>Instant Transfers</h4>
+								<p>Members can easily transfer EbbiCoins between user wallets without needing to list on the exchange</p>
+							</div>
+						</div>
+						<div class="services-item wow fadeIn" data-wow-delay="0.25s" style="visibility: visible; animation-delay: 0.3s; animation-name: none">
+							<div class="services-text">
+								<h4>Exchange Platform</h4>
+								<p>Launching in June 20th 2021. Members can trade and exchange Ebbicoin to ETH, BTC, and other Crypto Currencies from directly inside their wallets.</p>
+							</div>
+						</div>
+						<div class="services-item wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.45s; animation-name: none">
+							<div class="services-text">
+								<h4>Fuel For The Future</h4>
+								<p>EbbiCoin and its blockchain will be the underlying foundation of many enterprise level products and services. Allowing the active spending of Ebbicoin on services, which will continue to drive up the value of EbbiCoins being held by users.</p>
+							</div>
+						</div>
+						<div class="services-item wow fadeIn" data-wow-delay="0.35s" style="visibility: visible; animation-delay: 0.6s; animation-name: none">
+							<div class="services-text">
+								<h4>Instant Transfers To Fiat</h4>
+								<p>EbbiCoin's patented reserve fund and IOTA technology makes it easy to transfer your EbbiCoin into Fiat currency, and do instant transfers to your connected bank account or debit card.</p>
+							</div>
+						</div>
+						<div class="services-item wow fadeIn" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.75s; animation-name: none">
+							<div class="services-text">
+								<h4>Earn Free EbbiCoins</h4>
+								<p>Members can easily earn free EbbiCoin durring the ICO just by inviting people to buy ICO Coins. Bonus Rate up to 10%</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="modal fade" id="join-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+	<div class="modal-dialog">
+		<div>
+			<div class="content" style="margin: 21% auto auto; background: rgb(255, 255, 255) none repeat scroll 0% 0%; width: 407px; padding: 21px; border: 4px solid rgb(238, 164, 58)">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<div class="">
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="login-block">
+								<h3 class="heading-title">Join the community</h3>
+								<p [innerHTML]="this.communityResponse"></p>
+								<form id="subscription" #cmnty="ngForm" (ngSubmit)="community(cmnty.value)" [formGroup]="communityForm" method="post" class="af-form-wrapper" accept-charset="UTF-8" action="https://www.aweber.com/scripts/addlead.pl">
+									<input type="hidden" name="meta_web_form_id" value="1711862894" />
+									<input type="hidden" name="meta_split_id" value="" />
+									<input type="hidden" name="listname" value="awlist4987650" />
+									<input type="hidden" name="redirect" value="https://www.aweber.com/thankyou.htm?m=default" id="redirect_8497c4d4b26b8c6ea7ff3ea9976e3c34" />
+									<input type="hidden" name="meta_adtracking" value="My_Web_Form" />
+									<input type="hidden" name="meta_message" value="1" />
+									<input type="hidden" name="meta_required" value="name,email" />
+									<input type="hidden" name="meta_tooltip" value="" />
+									<div class="form-group">
+										<input class="form-control" type="text" name="name" placeholder="Name" formControlName="name" />
+										<app-field-error-display [displayError]="isFieldValid('name', communityForm)" errorMsg="Please enter name"></app-field-error-display>
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="text" name="email" placeholder="Email" formControlName="email" />
+										<app-field-error-display [displayError]="isFieldValid('email', communityForm)" errorMsg="Please enter email"></app-field-error-display>
+									</div>
+									<div class="form-group text-center">
+										<input class="btn btn-warning btn-block" name="submit" type="submit" value="Join Our Mailing List" alt="Join Our Mailing List" />
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="question-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+	<div class="modal-dialog">
+		<div>
+			<div class="content" style="margin: 21% auto auto; background: rgb(255, 255, 255) none repeat scroll 0% 0%; width: 407px; padding: 21px; border: 4px solid rgb(238, 164, 58)">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<div class="">
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="login-block">
+								<h3 class="heading-title">Have a question?</h3>
+								<div class="row">
+									<div class="col-md-4 col-md-offset-4">
+										<p [innerHTML]="this.haveQuestionResponseText"></p>
+									</div>
+								</div>
+								<form #question="ngForm" (ngSubmit)="haveQuestionSubmit(question.value)" [formGroup]="questionForm" id="form-register3" method="post" action="#">
+									<div class="form-group" style="margin-bottom: 1.5rem">
+										<input class="form-control" name="name" placeholder="Name" type="text" formControlName="name" />
+										<app-field-error-display [displayError]="isFieldValid('name', questionForm)" errorMsg="Please enter name"></app-field-error-display>
+									</div>
+									<div class="form-group" style="margin-bottom: 1.5rem">
+										<input class="form-control" name="email" placeholder="Email" type="text" formControlName="email" />
+										<app-field-error-display [displayError]="isFieldValid('email', questionForm)" errorMsg="Please enter email"></app-field-error-display>
+									</div>
+									<div class="form-group" style="margin-bottom: 1.5rem">
+										<textarea class="form-control" name="message" placeholder="Message" cols="30" rows="5" type="text" formControlName="message" style="color: #555"></textarea>
+										<app-field-error-display [displayError]="isFieldValid('message', questionForm)" errorMsg="Please enter message"></app-field-error-display>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-warning btn-danger btn-block" type="submit">Send message</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section id="community">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-xs-12 community">
+				<h3 class="heading-title">Join the community</h3>
+				<p>Be the first to receive our updates</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4 col-sm-12 text-center">
+				<a href="javascript:void(0)" data-toggle="modal" data-target="#question-modal" class="btn text-center">Send us your questions</a>
+			</div>
+			<div class="col-md-4 col-sm-12 text-center">
+				<a href="javascript:void(0)" data-toggle="modal" data-target="#join-modal" class="btn text-center">Join the community</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="copyright">
+					<p class="footer-logo"><img src="/assets/images/header-logo.png" alt="logo" /></p>
+					<p>Copyright © 2021 Ebbicoin All rights reserved.</p>
+				</div>
+				<ul class="footer_social">
+					<li>
+						<a href="https://twitter.com/@EbbiCoin" target="_blank" title="Twitter">
+							<i class="fa fa-twitter"></i>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.facebook.com/EbbiCoin/" target="_blank" title="Facebook">
+							<i class="fa fa-facebook" style="padding: 8px 12px !important"></i>
+						</a>
+					</li>
+					<li>
+						<a href="http://t.me/EbbiCoin" target="_blank" title="Telegram Social">
+							<i class="fa fa-telegram"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="modal fade" id="WelcomeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog">
+		<div class="content" style="margin: 21% auto auto; background: rgb(255, 255, 255) none repeat scroll 0% 0%; width: 407px; padding: 21px; border: 4px solid rgb(238, 164, 58);">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<p>If you are here, you are eligible to participate in our limited Pre-ICO. During Pre-ICO, coins will be given away for 0.70/coin.</p>
+					<p>As Pre-ICO coin supplies are very limited, when logging in if you find that all Pre-ICO coins are gone. You must wait until the ICO opens to the general public at 0.70/coin.</p>
+				</div>
+				<div class="col-md-12 col-sm-12 text-center">
+					<button type="button" class="btn btn-lg btn-blue small scroll" data-dismiss="modal" style="font-size: 16px; line-height: 38px; padding: 0 20px 0; font-weight: 300; color: #000; border-radius: 0;">I Understand</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<div class="modal fade" id="ExchangeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+	<div class="modal-dialog">
+		<div class="content" style="margin: 21% auto auto; background: rgb(255, 255, 255) none repeat scroll 0% 0%; width: 407px; padding: 21px; border: 4px solid rgb(238, 164, 58)">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<h3 class="text-center">Coming Soon</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

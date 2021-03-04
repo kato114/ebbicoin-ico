@@ -1,0 +1,266 @@
+<div class="wrapper">
+	<app-sidebar></app-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<app-header></app-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="card-panel card-alert">
+							<div class="card-content sponsor-alert">
+								<div class="input-group">
+									<span class="input-group-addon">Your referral link:</span>
+									<input readonly id="btcAddressCopy" class="form-control" value="https://ebbicoin.com/data/index.php/referral/{{ this.username }}" type="text" />
+									<span class="input-group-btn"> <a class="btn btn-xs btn-copy btn-copy-address button-copy" data-value-id="btcAddressCopy" (click)="copyReferralLink()">Copy</a> </span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="row">
+							<div class="col-sm-12 col-md-6">
+								<div class="card">
+									<div class="card-content">
+										<div class="card-header">
+											<h4 class="card-title">Account Information</h4>
+										</div>
+										<div class="table-responsive card-body">
+											<table class="display responsive-table table datatable-example dataTable">
+												<tbody>
+													<tr>
+														<td><b>Account Status</b></td>
+														<td><span style="text-transform: capitalize">regular</span></td>
+													</tr>
+													<tr>
+														<td><b>Sponsor</b></td>
+														<td>
+															<span style="text-transform: capitalize">{{ this.referral != null ? this.referral : 'None' }}</span>
+														</td>
+													</tr>
+													<tr>
+														<td><b>Total downline</b></td>
+														<td>{{ this.totalTeamMembers }}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-6">
+								<div class="card visitors-card">
+									<div class="card-content">
+										<div class="card-header">
+											<h4 class="card-title">Summary Total</h4>
+										</div>
+										<div class="table-responsive card-body">
+											<table class="display responsive-table table datatable-example dataTable">
+												<tbody>
+													<tr>
+														<td><b>Downline Purchasing</b></td>
+														<td>{{ this.totalTeamPurchase }} EbbiCoin</td>
+													</tr>
+													<tr>
+														<td><b>Total Referral Earning</b></td>
+														<td>{{ this.totalTeamIncome }} EbbiCoin</td>
+													</tr>
+													<tr>
+														<td><b>Total Additional Bonus</b></td>
+														<td>0 EbbiCoin</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12 col-md-12 col-lg-12 nav-multi-tabs">
+								<ul class="tabs nav nav-tabs" role="tablist" style="width: 100%">
+									<li role="presentation" class="col-xs-12 col-sm-3 col-md-3 col-lg-3 active"><a aria-controls="affiliate-panel" role="tab" data-toggle="tab" href="#affiliate-panel" class="">Affiliate</a></li>
+									<li role="presentation" class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><a aria-controls="level1-panel" role="tab" data-toggle="tab" href="#level1-panel" class="">Level 1</a></li>
+									<li role="presentation" class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><a aria-controls="level2-panel" role="tab" data-toggle="tab" href="#level2-panel" class="">Level 2</a></li>
+									<li role="presentation" class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><a aria-controls="level3-panel" role="tab" data-toggle="tab" href="#level3-panel" class="">Level 3</a></li>
+								</ul>
+							</div>
+							<div class="tab-content">
+								<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane active" role="tabpanel" id="affiliate-panel">
+									<div class="card">
+										<div class="card-content">
+											<div class="table-responsive dataTables_wrapper">
+												<table class="display responsive-table table datatable-example dataTable">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>User</th>
+															<th>Referral Earned</th>
+															<th>Status</th>
+															<th>Time</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let l of this.teamMembers; let i = index">
+															<td>{{ i + 1 }}</td>
+															<td>{{ l.username }}</td>
+															<td>{{ l.income }}</td>
+															<td>
+																<span *ngIf="l.status == 0" class="text-warning">Pending</span>
+																<span *ngIf="l.status == 1" class="text-success">Active</span>
+																<span *ngIf="l.status == 2" class="text-danger">Deactive</span>
+															</td>
+															<td>{{ l.created_at | date: 'dd-MMM-yyyy hh:mm a' }}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane" role="tabpanel" id="level1-panel">
+									<div class="card">
+										<div class="card-content">
+											<div class="table-responsive dataTables_wrapper">
+												<table class="display responsive-table table datatable-example dataTable">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>User</th>
+															<th>Referral Earned</th>
+															<th>Status</th>
+															<th>Time</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let l of this.level1; let i = index">
+															<td>{{ i + 1 }}</td>
+															<td>{{ l.username }}</td>
+															<td>{{ l.income }}</td>
+															<td>
+																<span *ngIf="l.status == 0" class="text-warning">Pending</span>
+																<span *ngIf="l.status == 1" class="text-success">Active</span>
+																<span *ngIf="l.status == 2" class="text-danger">Deactive</span>
+															</td>
+															<td>{{ l.created_at | date: 'dd-MMM-yyyy hh:mm a' }}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane" role="tabpanel" id="level2-panel">
+									<div class="card">
+										<div class="card-content">
+											<div class="table-responsive dataTables_wrapper">
+												<table class="display responsive-table table datatable-example dataTable">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>User</th>
+															<th>Referral Earned</th>
+															<th>Status</th>
+															<th>Time</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let l of this.level2; let i = index">
+															<td>{{ i + 1 }}</td>
+															<td>{{ l.username }}</td>
+															<td>{{ l.income }}</td>
+															<td>
+																<span *ngIf="l.status == 0" class="text-warning">Pending</span>
+																<span *ngIf="l.status == 1" class="text-success">Active</span>
+																<span *ngIf="l.status == 2" class="text-danger">Deactive</span>
+															</td>
+															<td>{{ l.created_at | date: 'dd-MMM-yyyy hh:mm a' }}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane" role="tabpanel" id="level3-panel">
+									<div class="card">
+										<div class="card-content">
+											<div class="table-responsive dataTables_wrapper">
+												<table class="display responsive-table table datatable-example dataTable">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>User</th>
+															<th>Referral Earned</th>
+															<th>Status</th>
+															<th>Time</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let l of this.level3; let i = index">
+															<td>{{ i + 1 }}</td>
+															<td>{{ l.username }}</td>
+															<td>{{ l.income }}</td>
+															<td>
+																<span *ngIf="l.status == 0" class="text-warning">Pending</span>
+																<span *ngIf="l.status == 1" class="text-success">Active</span>
+																<span *ngIf="l.status == 2" class="text-danger">Deactive</span>
+															</td>
+															<td>{{ l.created_at | date: 'dd-MMM-yyyy hh:mm a' }}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col col-sm-12 col-md-12 col-lg-12">
+								<div class="card visitors-card primary-card">
+									<div class="card-content">
+										<span class="card-title">Detail Referral Earning</span>
+										<div class="card-body box-body">
+											<div id="example_wrapper" class="table-responsive dataTables_wrapper">
+												<table class="display responsive-table table datatable-example dataTable">
+													<thead>
+														<tr>
+															<th>Downline</th>
+															<th>Referral Purchasing</th>
+															<th>%</th>
+															<th>Referral Earning</th>
+														</tr>
+													</thead>
+													<tbody *ngIf="this.referral_status">
+														<tr>
+															<td>Level 1</td>
+															<td>{{ this.referral_income.level1.amount }}</td>
+															<td>10%</td>
+															<td>{{ this.referral_income.level1.referral_income }}</td>
+														</tr>
+														<tr>
+															<td>Level 2</td>
+															<td>{{ this.referral_income.level2.amount }}</td>
+															<td>5%</td>
+															<td>{{ this.referral_income.level2.referral_income }}</td>
+														</tr>
+														<tr>
+															<td>Level 3</td>
+															<td>{{ this.referral_income.level3.amount }}</td>
+															<td>2%</td>
+															<td>{{ this.referral_income.level3.referral_income }}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<app-footer></app-footer>
+	</div>
+</div>

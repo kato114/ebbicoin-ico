@@ -1,0 +1,58 @@
+<div class="wrapper">
+	<app-sidebar></app-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<app-header></app-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col col-sm-12 col-md-12 col-lg-12">
+						<div class="card">
+							<div class="card-content">
+								<div class="card-header">
+									<h4 class="card-title">Support Tickets</h4>
+									<p class="category">All your submitted tickets</p>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<a class="btn btn-wd btn-success" [routerLink]="['/support/add']" [routerLinkActive]="['active']"> <i class="fa fa-plus"></i> Submit a New Ticket </a>
+									</div>
+									<div id="example_wrapper" class="dataTables_wrapper table-responsive">
+										<table class="display responsive-table table datatable-example dataTable">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Ticket ID</th>
+													<th>Title</th>
+													<th>Content</th>
+													<th>Created At</th>
+													<th>Status</th>
+													<th>Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr *ngFor="let t of this.tickets; let i = index">
+													<td>{{ i + 1 }}</td>
+													<td>{{ t.id }}</td>
+													<td>{{ t.title }}</td>
+													<td>{{ t.description }}</td>
+													<td>{{ t.created_at }}</td>
+													<td *ngIf="t.status == 0"><span class="btn btn-info">Waiting for Support Response</span></td>
+													<td *ngIf="t.status == 1"><span class="btn btn-success">Waiting for your response</span></td>
+													<td *ngIf="t.status == 2"><span class="btn btn-danger">Closed</span></td>
+													<td>
+														<a [routerLink]="['/support/view/' + t.id]" [routerLinkActive]="['active']">View</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<app-footer></app-footer>
+	</div>
+</div>

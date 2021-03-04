@@ -1,0 +1,101 @@
+<div class="wrapper">
+	<admin-sidebar></admin-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<admin-header></admin-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<p [innerHTML]="this.message"></p>
+						<div class="card">
+							<div class="card-content">
+								<div class="card-body">
+									<div class="card-header">
+										<div class="row">
+											<div class="col-md-6 col-sm-12 col-xs-12">
+												<h4 class="card-title">Support Tickets</h4>
+												<p class="category">All your submitted tickets</p>
+											</div>
+											<div class="col-md-3 col-sm-6 col-xs-5">
+												<a [routerLink]="['/admin/user/add']" [routerLinkActive]="['active']" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New</a>
+											</div>
+											<div class="col-md-3 col-sm-6 col-xs-6">
+												<input type="text" [(ngModel)]="term" class="form-control" placeholder="Search" />
+											</div>
+										</div>
+									</div>
+									<div class="table-responsive">
+										<table class="table no-margin">
+											<thead>
+												<tr>
+													<th>S.No.</th>
+													<th (click)="sortNumberColumn('username')">Username</th>
+													<th (click)="sortNumberColumn('email')">Email</th>
+													<th (click)="sortNumberColumn('ebbi_balance')">Ebbi Balance</th>
+													<th (click)="sortNumberColumn('status')">Status</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr *ngFor="let u of this.users | filter: term; let i = index">
+													<td>{{ i + 1 }}</td>
+													<td>{{ u.username }}</td>
+													<td>{{ u.email }}</td>
+													<td>{{ u.ebbi_balance }}</td>
+													<td>
+														<span [ngClass]="{ 'text-warning': u.status == 0, 'text-success': u.status == 1, 'text-danger': u.status == 2 }">
+															{{ u.status == 0 ? 'Pending' : '' }}
+															{{ u.status == 1 ? 'Active' : '' }}
+															{{ u.status == 2 ? 'Rejected' : '' }}
+														</span>
+													</td>
+													<td>
+														<button class="btn btn-success" [hidden]="u.status == 1" (click)="changeStatus(u.id, 1)"><i class="fa fa-check"></i></button>
+														<button class="btn btn-danger" [hidden]="u.status == 2" (click)="changeStatus(u.id, 2)"><i class="fa fa-times"></i></button>
+														<button class="btn btn-info" [hidden]="u.status != 1" (click)="showBalanceModal(u.id)"><i class="fa fa-plus"></i></button>
+														<a [routerLink]="['/admin/user/edit', u.id]" [routerLinkActive]="['active']" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+														<button class="btn btn-red" [hidden]="u.status == 2" (click)="changeStatus(u.id, 3)"><i class="fa fa-trash"></i></button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<admin-footer></admin-footer>
+	</div>
+</div>
+
+<!-- Balance Modal -->
+<div id="BalanceModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<form #model="ngForm" (ngSubmit)="addUserEbbiCoinBalance(model.value)" [formGroup]="ebbiCoinForm" method="post">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" (click)="hideBalanceModal()">&times;</button>
+					<h4 class="modal-title">Add Ebbi Coin</h4>
+				</div>
+				<div class="modal-body">
+					<input id="add-coin-id" class="form-control" name="user_id" placeholder="Enter User ID" style="border-radius: 0px" type="hidden" formControlName="user_id" />
+					<div class="form-group" [ngClass]="displayFieldCss('coin', ebbiCoinForm)">
+						<label class="control-label">
+							Coin
+							<span>*</span>
+						</label>
+						<input class="form-control" name="coin" placeholder="Enter coin" style="border-radius: 0px" type="text" formControlName="coin" />
+						<app-field-error-display [displayError]="isFieldValid('coin', ebbiCoinForm)" errorMsg="Please enter coin"></app-field-error-display>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Add Coin</button>
+					<button type="button" class="btn btn-default" (click)="hideBalanceModal()">Close</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

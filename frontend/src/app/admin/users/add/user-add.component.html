@@ -1,0 +1,77 @@
+<div class="wrapper">
+    <admin-sidebar></admin-sidebar>
+    <div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+        <admin-header></admin-header>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
+                        <div class="card">
+                            <div class="card-content">
+                                <form #model="ngForm" (ngSubmit)="addUser(model.value)" [formGroup]="userForm" id="form-register2" method="post" action="#" novalidate>
+                                    <div class="card-header">
+                                        <h3 class="card-title" style="color: rgb(238, 164, 58);">Register</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <p [innerHTML]="this.userFormResponseText"></p>
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                Username
+                                                <span>*</span>
+                                            </label>
+                                            <input class="form-control" name="username" placeholder="Enter username" style="border-radius: 0px;" type="text" formControlName="username">
+                                            <div class="text-danger" *ngIf="userForm.get('username').errors && (userForm.get('username').dirty || userForm.get('username').touched)">
+                                                <p *ngIf="userForm.get('username').errors['required']">Username can not be empty</p>
+                                                <p *ngIf="userForm.get('username').errors['minlength']">Username must be 8 characters long</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                E-mail
+                                                <span>*</span>
+                                            </label>
+                                            <input class="form-control" name="email" placeholder="Email" style="border-radius: 0px;" type="email" formControlName="email">
+                                            <div class="text-danger" *ngIf="userForm.get('email').errors && (userForm.get('email').dirty || userForm.get('email').touched)">
+                                                <p *ngIf="userForm.get('email').errors['required']">Email can not be empty</p>
+                                                <p *ngIf="userForm.get('email').errors['email']">Please enter valid email address</p>
+                                            </div>
+                                        </div> 
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                Password
+                                                <span>*</span>
+                                            </label>
+                                            <input class="form-control" name="password" placeholder="Password" style="border-radius: 0px;" type="password" formControlName="password">
+                                            <div class="text-danger" *ngIf="userForm.get('password').errors && (userForm.get('password').dirty || userForm.get('password').touched)">
+                                                <p *ngIf="userForm.get('password').errors['required']">Password can not be empty</p>
+                                                <p *ngIf="userForm.get('password').errors['minlength']">Password must be 5 characters long</p>
+                                                <!-- <p *ngIf="userForm.get('password').errors['pattern']">Password must contain at least one letter, one number and one special character</p> -->
+                                            </div>
+                                        </div> 
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                Confirm  Password
+                                                <span>*</span>
+                                            </label>
+                                            <input class="form-control" name="confPassword" placeholder="Confirm Password" style="border-radius: 0px;" type="password" formControlName="confPassword">
+                                            <div class="text-danger" *ngIf="userForm.get('confPassword').errors && (userForm.get('confPassword').dirty || userForm.get('confPassword').touched)">
+                                                <p *ngIf="userForm.get('confPassword').errors['required']">Confirm Password can not be empty</p>
+                                                <p *ngIf="userForm.get('confPassword').errors['minlength']">Confirm Password must be 5 characters long</p>
+                                                <!-- <p *ngIf="userForm.get('confPassword').errors['pattern']">Confirm Password must contain at least one letter, one number and one special character</p> -->
+                                                <p *ngIf="cpwd.hasError('invalid')">Confirm Password did not match with password</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <button class="btn btn-warning btn-block" type="submit">Add User</button>
+                                    </div>
+                                </form> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <admin-footer></admin-footer>
+    </div>
+</div>

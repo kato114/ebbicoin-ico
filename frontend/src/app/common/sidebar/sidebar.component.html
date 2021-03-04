@@ -1,0 +1,63 @@
+<!-- <link href="/assets/user/css/bootstrap-switch.css" rel="stylesheet"> -->
+<!-- <link href="/assets/user/css/jquery.css" rel="stylesheet"> -->
+<link href="/assets/user/css/paper-dashboard.css" rel="stylesheet">
+
+<!--start> fonts  <!-->
+
+<link href="/assets/user/css/cryptocoins.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/user/font/themify-icons/themify-icons.css">
+
+<!-- <link href="/assets/user/css/themify-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/user/font/themify-icons/demo/demo.css">
+<link rel="stylesheet" href="/assets/user/font/themify-icons/ie7/ie7.css"> -->
+
+<!--[end> fonts  <!-->
+
+<link href="/assets/user/css/style.css" rel="stylesheet" type="text/css">
+<!-- <link href="/assets/user/css/main.css" rel="stylesheet" type="text/css"> -->
+
+<div class="sidebar" data-active-color="danger">
+	<div class="logo"> <a href="" class="simple-text logo-mini"> <img src="/assets/user/img/logo-36x36.png" style="width: 26px;" alt="EBBICOIN"> </a>
+		<div class="text-logo"> <a href="" class="simple-text logo-normal"> EBBICOIN </a> <a href="javascript:void(0);" class="simple-text logo-normal back-home"> <i class="fa fa-home"></i> </a> </div>
+	</div>
+	<div class="sidebar-wrapper ps-container ps-theme-default ps-active-x" data-ps-id="f15df5a3-7978-837d-0084-94384754f131">
+		<div class="user">
+			<div class="info">
+				<div class="photo"> <img src="/assets/user/img/face.png" alt=""> </div>
+				<a data-toggle="collapse" href="#collapseExample" class="collapsed"> <span>{{ this.username }}<b class="caret"></b></span> </a>
+				<div class="clearfix"></div>
+				<div class="collapse" id="collapseExample">
+					<ul class="nav">
+						<li> <a [routerLink]="['/my-account']" [routerLinkActive]="['active']"> <span class="sidebar-mini">&nbsp;</span> <span class="sidebar-normal">My Profile</span> </a> </li>
+						<li> <a href="javascript:void(0);" (click)="logout()"> <span class="sidebar-mini">&nbsp;</span> <span class="sidebar-normal">Logout</span> </a> </li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<ul class="nav" data-collapsible="accordion">
+			<li [ngClass]="{ 'active': this.page == '/dashboard' }"> <a [routerLink]="['/dashboard']" [routerLinkActive]="['active']"> <i class="fa fa-cart-arrow-down"></i><p> Buy ICO COIN </p></a> </li>
+			<li [ngClass]="{ 'active': this.page == '/how-to-buy' }"> <a [routerLink]="['/how-to-buy']" [routerLinkActive]="['active']"> <i class="fa fa-info-circle"></i><p> How to buy? </p></a> </li>
+			<li [ngClass]="{ 'active': this.page == '/my-wallets' }"> <a [routerLink]="['/my-wallets']" [routerLinkActive]="['active']"> <i class="fa fa-money"></i><p> My Wallets </p></a> </li>
+			<li [ngClass]="{ 'active': this.page == '/team-members' }"> <a data-toggle="collapse" href="#menu_component_affiliate"> <i class="fa fa-usd"></i><p> EBBI Affiliate <b class="caret"></b> </p></a>
+				<div class="collapse" id="menu_component_affiliate">
+					<ul class="nav">
+						<li class=""> <a [routerLink]="['/team-members']" [routerLinkActive]="['active']"> <span class="sidebar-mini">TM</span> <span class="sidebar-normal">Team Members</span> </a> </li>
+						<li class=""> <a href="javascript:void(0);"> <span class="sidebar-mini">MM</span> <span class="sidebar-normal">Make Money</span> </a> </li>
+					</ul>
+				</div>
+			</li>
+			<li [ngClass]="{ 'active': this.page == '/my-account' }"><a [routerLink]="['/my-account']" [routerLinkActive]="['active']"> <i class="fa fa-user"></i><p> My Account </p></a> </li>
+			<li [ngClass]="{ 'active': this.page == '/supports' }"> <a [routerLink]="['/supports']" [routerLinkActive]="['active']"> <i class="fa fa-question-circle"></i><p> Support </p></a> </li>
+			<li> 
+				<a data-toggle="collapse" href="#menu_component_community"> <i class="fa fa-facebook"></i><p> Community <b class="caret"></b> </p></a>
+				<div class="collapse " id="menu_component_community">
+					<ul class="nav">
+						<li class=""> <a href="http://t.me/EbbiCoin" target="_blank"> <span class="sidebar-mini"><i class="fa fa-telegram"></i></span> <span class="sidebar-normal">Telegram Group</span> </a> </li>
+						<li class=""> <a href="https://www.facebook.com/EbbiCoin/" target="_blank"> <span class="sidebar-mini"><i class="fa fa-facebook-square"></i></span> <span class="sidebar-normal">Facebook Page</span> </a> </li>
+						<li class=""> <a href="http://www.ebbicointalk.com/" target="_blank"> <span class="sidebar-mini"><i class="fa fa-users"></i></span> <span class="sidebar-normal">EbbiCoin Message Board</span> </a> </li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

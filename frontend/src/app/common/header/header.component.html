@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-minimize">
+            <button (click)="sidebar()" id="minimizeSidebar" class="btn btn-fill btn-icon"><i class="fa fa-ellipsis-v"></i></button>
+        </div>
+        <div class="navbar-header">
+            <button (click)="mobileSidebar()" type="button" class="navbar-toggle" > <span class="sr-only">Toggle navigation</span> <span class="icon-bar bar1"></span> <span class="icon-bar bar2"></span> <span class="icon-bar bar3"></span> </button>
+            <a class="navbar-brand" href="javascript:void(0)">{{ this.url }}</a> 
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-user-info"> <a href="javascript:void(0);"> <i class="fa fa-user"></i> {{ this.user.username }} </a> </li>
+                <li class="nav-logout"> <a href="javascript:void(0);" (click)="logout()"><i class="fa fa-sign-out"></i>logout</a> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li> <a><p>BTC <span>$10,903.80</span></p></a> </li> -->
+                <li> <a><p>ETH <span>${{ this.rate.eth }}</span></p></a> </li>
+                <li> <a><p>EBBI <span>${{ this.rate.ebbi }}</span></p></a> </li>
+                <li class="separator"> <a><p>|</p></a> </li>
+            </ul>
+        </div>
+    </div>
+</nav>

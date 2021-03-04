@@ -1,0 +1,507 @@
+<div class="wrapper">
+	<app-sidebar></app-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<app-header></app-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="card-panel card-alert">
+							<div class="card-content sponsor-alert">
+								<div class="input-group">
+									<span class="input-group-addon">Your referral link:</span>
+									<input readonly id="btcAddressCopy" class="form-control" value="https://ebbicoin.com/data/index.php/referral/{{ this.username }}" type="text" />
+									<span class="input-group-btn"> <a class="btn btn-xs btn-copy btn-copy-address button-copy" data-value-id="btcAddressCopy" (click)="copyReferralLink()">Copy</a> </span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card"> 
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big btc-color text-center"> <i class="cc BTC"></i> </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>BTC Wallet</p>
+                                            <span id="index-btc-amount">{{ this.balance.btc_balance }}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <hr>
+                                    <div class="stats"> <i class="fa fa-refresh"></i> <a href="javascript:void(0);" class="btn-refresh-transactions">Update Balance</a> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card"> 
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big eth-color text-center"> <i class="cc ETH"></i> </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>ETH Wallet</p>
+                                            <span id="index-eth-amount">{{ this.balance.eth_balance }}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <hr>
+                                    <div class="stats"> <i class="fa fa-refresh"></i> <a href="javascript:void(0);" class="btn-refresh-transactions">Update Balance</a> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big bch-color text-center"> <i class="cc BCH-alt"></i> </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>BCH Wallet</p>
+                                            <span id="index-bch-amount">{{ this.balance.bch_balance }}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <hr>
+                                    <div class="stats"> <i class="fa fa-refresh"></i> <a href="javascript:void(0);" class="btn-refresh-transactions">Update Balance</a> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-success text-center"> <i class="ti-wallet"></i> </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>EBBI   Wallet</p>
+                                            <span id="index-EBBI  -amount">{{ this.balance.ebbi_balance }}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <hr>
+                                    <div class="stats"> <i class="fa fa-refresh"></i> <a href="javascript:void(0);" class="btn-refresh-transactions">Update Balance</a> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="card primary-card">
+							<div class="card-content">
+								<div class="card-body box-body countdown-card">
+									<!-- <div class="countdown" data-date="2018  -11-17" data-start="-32808118" data-end="-753778" data-start-reverse="-753778"></div> -->
+									<div class="row progress-bar-wrapper">
+										<div class="col-md-3 col-sm-12 col-xs-12"><h4 style="margin: 0">ICO COUNTDOWN</h4></div>
+										<div class="col-md-2 col-sm-12 col-xs-12 progress-bar-start-text text-right hidden-xs">SOLD : {{ this.soldCoins }} EBBI</div>
+										<div class="col-md-5 col-sm-12 col-xs-12">
+											<div class="progress stats-card-progress" id="progress-tooltip" data-toggle="tooltip" data-placement="top" data-delay="50" data-original-title="704,523" title="">
+												<div class="determinate" style="width: 0%; height: 28px" id="data-token-sold"></div>
+											</div>
+										</div>
+										<div class="col-md-2 col-sm-12 col-xs-12 progress-bar-start-text hidden-xs">AVAILABLE: {{ this.totalCoins - this.soldCoins }} EBBI</div>
+									</div>
+									<div class="row visible-xs">
+										<div class="col-md-12">
+											<div class="col-md-2 col-sm-6 col-xs-6 progress-bar-end-text text-left visible-xs">SOLD : {{ this.soldCoins }} EBBI</div>
+											<div class="col-md-2 col-sm-6 col-xs-6 progress-bar-end-text text-right">AVAILABLE: {{ this.totalCoins - this.soldCoins }} EBBI</div>
+										</div>
+									</div>
+									<div class="text-muted ico-notifications">(*) EBBICoin sale may be closed sooner if it's sold out.</div>
+								</div>
+								<!-- <hr>
+                                <div class="footer">
+                                    <h3 class="text-danger text-center opening-time"> EBBICoin sale closed. Please wait for the next open.</h3>
+                                </div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="card primary-card">
+							<div class="card-content">
+								<h4 class="card-title pull-left">My Orders</h4>
+								<button class="btn btn-danger pull-right" (click)="showExchangeModal()">Get EbbiCoin Now</button>
+								<div class="card-body box-body">
+									<div id="example_wrapper" class="dataTables_wrapper">
+										<div class="table-responsive">
+											<table class="table">
+												<thead>
+													<tr>
+														<th>S.No.</th>
+														<th>Exchange</th>
+														<th>Sent</th>
+														<th>Received</th>
+														<th>Date</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr *ngFor="let t of this.transactions; let i = index">
+														<td>{{ i + 1 }}</td>
+														<td>{{ t.exchange }}</td>
+														<td>{{ t.send_quantity }}</td>
+														<td>{{ t.receive_quantity }}</td>
+														<td>{{ t.created_at | date: 'dd-MM-yyyy hh:mm aa' }}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="card primary-card">
+                            <div class="card-content">
+                                <h4 class="card-title">BUY COIN  NOW</h4>
+                                <div class="card-body">
+                                    <form id="buyForm" action="/user/buycoin" method="post" novalidate>
+                                        <input name="QlhsWUdYZlZ0c0J0YnI3UHp5NjFSdz09" value="bFlnWm1yQXRwOHJ4dXNFeFpqc2FRdz09" type="hidden">
+                                        <div class="form-group">
+                                            <label for="buy_amount" class="control-label">
+                                                EBBI   Amount
+                                                <span>*</span>
+                                                <p class="category">To buy EBBI  , please click <a [routerLink]="['/my-wallets']" [routerLinkActive]="['active']">WALLETS</a> and Deposit BTC/ETH/BCH.</p>
+                                            </label>
+                                            <input class="form-control" step="any" id="buy_amount" name="amount" required autocomplete="off" aria-required="true" type="number">
+                                            <a href="javascript:void(0)" data-btc="0" data-eth="0.000000" data-bch="0.000000" class="btn btn-info btn-fill" id="buy-amount"> Buy all </a> 
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="btc_amount">BTC Amount</label>
+                                                    <input class="form-control" readonly id="btc_amount" name="btc_amount" disabled="disabled" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="eth_amount">ETH Amount</label>
+                                                    <input class="form-control" readonly id="eth_amount" name="eth_amount" disabled="disabled" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="bch_amount">BCH Amount</label>
+                                                    <input class="form-control" readonly id="bch_amount" name="bch_amount" disabled="disabled" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="usd_amount">USD Amount</label>
+                                                    <input class="form-control" readonly id="usd_amount" name="usd_amount" disabled="disabled" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input_password">Your password:</label>
+                                            <input class="form-control" name="password" id="input_password" required aria-required="true" type="password">
+                                        </div>
+                                        <div class="card-footer text-center">
+                                            <button type="submit" class="btn btn-wd btn-warning btn-fill" id="btn-buy-coin" disabled="disabled"> <span class="btn-label"><i class="fa fa-money"></i></span> Buy EBBICOIN </button>
+                                        </div>
+                                    </form>
+                                    <input id="rate-btc" data-value="10903.8" type="hidden">
+                                    <input id="rate-eth" data-value="1150.23" type="hidden">
+                                    <input id="rate-bch" data-value="1602.43" type="hidden">
+                                    <input id="rate-usd" data-value="1.15" type="hidden">
+                                    <input data-value="0.00010546781855867" id="EBBI  -btc" type="hidden">
+                                    <input data-value="0.000999800039992" id="EBBI  -eth" type="hidden">
+                                    <input data-value="0.0007176600537933" id="EBBI  -bch" type="hidden">
+                                </div>
+                            </div>
+                        </div> -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="card">
+							<div class="card-content">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table no-margin">
+											<thead>
+												<tr>
+													<th>ICO</th>
+													<th>Time</th>
+													<th>Day/Round COIN</th>
+													<th>Price (USD)</th>
+													<th>Status</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="{{ this.stage == 'First Round' ? 'active' : '' }}">
+													<td>First Round</td>
+													<td>May 21- May 31</td>
+													<td>0</td>
+													<td>$0.70</td>
+													<td>0 Sold</td>
+												</tr>
+												<tr class="{{ this.stage == 'Second Round' ? 'active' : '' }}">
+													<td>Second Round</td>
+													<td>June 1 - June 10</td>
+													<td>0</td>
+													<td>$0.80</td>
+													<td>0 Sold</td>
+												</tr>
+												<tr class="{{ this.stage == 'Third Round' ? 'active' : '' }}">
+													<td>Third Round</td>
+													<td>June 11- June 21</td>
+													<td>0</td>
+													<td>$0.90</td>
+													<td>0 Sold</td>
+												</tr>
+												<tr class="{{ this.stage == 'Fourth Round' ? 'active' : '' }}">
+													<td>Fourth Round</td>
+													<td>June 22- July 4</td>
+													<td>0</td>
+													<td>$1.00</td>
+													<td>0 Sold</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<app-footer></app-footer>
+	</div>
+</div>
+
+<div id="ExchangeModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="hideExchangeModal()">&times;</button>
+				<h4 class="modal-title">Get EbbiCoin Now</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<div class="row">
+						<div class="col-xs-4">
+							<div class="icon-big eth-color text-center"><i class="cc ETH"></i></div>
+						</div>
+						<div class="col-xs-8">
+							<div class="numbers">
+								<h4>
+									ETH Wallet Balance - <span id="index-eth-amount">{{ this.balance.eth_balance }}</span>
+								</h4>
+							</div>
+						</div>
+					</div>
+
+					<div class="text-left Get-diposite">
+						<!-- <button class="btn btn-warning" (click)="showCoinBuyModal('ETH')">Get Ethereum Now</button> -->
+						<button class="btn btn-info" (click)="showAddressModal()">Deposit Ethereum</button>
+						<button class="btn btn-success" (click)="showBuyEbbiCoinModal()">Exchange With EbbiCoin</button>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<p class="pull-left">Don't have ethereum yet? <a href="https://www.coinbase.com/signup" target="_blank"> Click here</a> to get some.</p>
+				<button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideExchangeModal()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="AddressModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="hideAddressModal()">&times;</button>
+				<h4 class="modal-title">Deposit Ethereum</h4>
+			</div>
+			<div class="modal-body">
+				<h5 style="margin-top: 0; font-weight: normal; text-align: center">ETH To EBBI Exchange Rate</h5>
+				<form method="POST" #model="ngForm" [formGroup]="buyEbbiCoin">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<input type="text" name="eth" id="eth-eth" class="form-control" placeholder="ETH" (keyup)="calculateEbbi(buyEbbiCoin.get('eth').value)" formControlName="eth" pattern="^[0-9]\d{0,9}(\.\d{1,8})?%?$" />
+								<div class="text-danger" *ngIf="buyEbbiCoin.get('eth').errors && (buyEbbiCoin.get('eth').dirty || buyEbbiCoin.get('eth').touched)">
+									<p *ngIf="buyEbbiCoin.get('eth').errors['required']">This field can not be empty</p>
+									<p *ngIf="buyEbbiCoin.get('eth').errors['pattern']">This is not valid amount</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<input type="text" name="ebbi" id="eth-ebbi" class="form-control" placeholder="EBBI" (keyup)="calculateEth(buyEbbiCoin.get('ebbi').value)" formControlName="ebbi" pattern="^[0-9]\d{0,9}(\.\d{1,8})?%?$" />
+								<div class="text-danger" *ngIf="buyEbbiCoin.get('ebbi').errors && (buyEbbiCoin.get('ebbi').dirty || buyEbbiCoin.get('ebbi').touched)">
+									<p *ngIf="buyEbbiCoin.get('ebbi').errors['required']">This field can not be empty</p>
+									<p *ngIf="buyEbbiCoin.get('ebbi').errors['pattern']">This is not valid amount</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<hr />
+				<div class="row">
+					<div class="col-md-12">
+						<h5 class="send-eth-addr" style="margin-top: 0; font-weight: normal; text-align: center; position: relative">
+							Send ETH to Address
+							<small style="position: absolute; right: 0; bottom: 0"><a class="pull-right" href="javascript:void(0);" (click)="showQRModal()">SHOW QR CODE</a></small>
+						</h5>
+					</div>
+				</div>
+				<div class="sponsor-alert">
+					<div class="input-group">
+						<input type="text" class="form-control" id="ETHAddress" value="{{ this.user.eth_address }}" disabled />
+						<span class="input-group-btn"> <a class="btn btn-xs btn-copy btn-copy-address button-copy" data-value-id="btcAddressCopy" (click)="copyAddress()">Copy</a> </span>
+					</div>
+				</div>
+				<hr />
+				<div class="text-center">
+					<div id="btn_mask">
+						<img src="/assets/images/metamask.svg" alt="Metamask Icon" width="150" />
+						<br /><br />
+						<button class="btn btn-info" onclick="connetWallet()">Connect</button>
+					</div>
+					<div id="btn_price" class="d-none">
+						<button class="btn btn-info" onclick="sendEthereum(50)">$50</button>
+						<button class="btn btn-info" onclick="sendEthereum(100)">$100</button>
+						<button class="btn btn-info" onclick="sendEthereum(500)">$500</button>
+						<button class="btn btn-info" onclick="sendEthereum(1000)">$1000</button>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-md-12">
+						<p [innerHTML]="this.updateBalanceResponse"></p>
+					</div>
+					<div class="col-md-8">
+						<h5>EbbiCoin Balance : {{ this.balance.ebbi_balance }}</h5>
+					</div>
+					<div class="col-md-4">
+						<button class="btn btn-success btn-update" (click)="updateBalance()"><i class="fa fa-refresh"></i> Update</button>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<p class="pull-left">Don't have ethereum yet? <a href="https://www.coinbase.com/signup" target="_blank"> Click here</a> to get some.</p>
+				<!-- <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideAddressModal()">Close</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="QRModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="hideQRModal()">&times;</button>
+				<h4 class="modal-title">QR Code</h4>
+			</div>
+			<div class="modal-body">
+				<iframe height="150" width="150" style="display: block; margin: 0 auto" frameborder="0" [src]="this.ethIframe"></iframe>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="BuyEbbiCoinModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<form method="POST" #model="ngForm" (ngSubmit)="buyEbbiCoinSubmit(model.value)" [formGroup]="buyEbbiCoin">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" (click)="hideBuyEbbiCoinModal()">&times;</button>
+					<h4 class="modal-title">Buy EbbiCoin Now</h4>
+				</div>
+				<div class="modal-body">
+					<p [innerHTML]="this.EthEbbiMessage"></p>
+					<div class="form-group">
+						<input type="text" name="eth" id="eth-eth" class="form-control" placeholder="ETH" (keyup)="calculateEbbi(buyEbbiCoin.get('eth').value)" formControlName="eth" pattern="^[0-9]\d{0,9}(\.\d{1,8})?%?$" />
+						<div class="text-danger" *ngIf="buyEbbiCoin.get('eth').errors && (buyEbbiCoin.get('eth').dirty || buyEbbiCoin.get('eth').touched)">
+							<p *ngIf="buyEbbiCoin.get('eth').errors['required']">This field can not be empty</p>
+							<p *ngIf="buyEbbiCoin.get('eth').errors['pattern']">This is not valid amount</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="text" name="ebbi" id="eth-ebbi" class="form-control" placeholder="EBBI" (keyup)="calculateEth(buyEbbiCoin.get('ebbi').value)" formControlName="ebbi" pattern="^[0-9]\d{0,9}(\.\d{1,8})?%?$" />
+						<div class="text-danger" *ngIf="buyEbbiCoin.get('ebbi').errors && (buyEbbiCoin.get('ebbi').dirty || buyEbbiCoin.get('ebbi').touched)">
+							<p *ngIf="buyEbbiCoin.get('ebbi').errors['required']">This field can not be empty</p>
+							<p *ngIf="buyEbbiCoin.get('ebbi').errors['pattern']">This is not valid amount</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Buy Now</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideBuyEbbiCoinModal()">Close</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div id="CoinBuyModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<form method="POST" #coins="ngForm" (ngSubmit)="buyCoinSubmit(coins.value)" [formGroup]="buyCoin">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" (click)="hideCoinBuyModal()">&times;</button>
+					<h4 class="modal-title">Buy EbbiCoin Now</h4>
+				</div>
+				<div class="modal-body">
+					<p [innerHTML]="this.CoinMessage"></p>
+					<div class="form-group">
+						<input type="text" name="currency" id="currency" class="form-control" placeholder="Currency Name" formControlName="currency" readonly />
+						<div class="text-danger" *ngIf="buyCoin.get('currency').errors && (buyCoin.get('currency').dirty || buyCoin.get('currency').touched)">
+							<p *ngIf="buyCoin.get('currency').errors['required']">This field can not be empty</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="text" name="quantity" id="quantity" class="form-control" placeholder="Quantity" (keyup)="calculateCoin(buyCoin.get('quantity').value)" formControlName="quantity" pattern="^[0-9]\d{0,9}(\.\d{1,8})?%?$" />
+						<div class="text-danger" *ngIf="buyCoin.get('quantity').errors && (buyCoin.get('quantity').dirty || buyCoin.get('quantity').touched)">
+							<p *ngIf="buyCoin.get('quantity').errors['required']">This field can not be empty</p>
+							<p *ngIf="buyCoin.get('quantity').errors['pattern']">This is not valid amount</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="text" name="usd" id="usd" class="form-control" placeholder="USD" (keyup)="calculateCoinUSD(buyCoin.get('usd').value)" formControlName="usd" pattern="^[0-9]\d{0,9}(\.\d{1,8})?%?$" />
+						<div class="text-danger" *ngIf="buyCoin.get('usd').errors && (buyCoin.get('usd').dirty || buyCoin.get('usd').touched)">
+							<p *ngIf="buyCoin.get('usd').errors['required']">This field can not be empty</p>
+							<p *ngIf="buyCoin.get('usd').errors['pattern']">This is not valid amount</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<select name="payment_method" id="payment_method" class="form-control" placeholder="USD" (keyup)="calculateCoinUSD(buyCoin.get('payment_method').value)" formControlName="payment_method">
+							<option value="">Select Payment Method</option>
+							<option *ngFor="let p of this.paymentMethods" value="p.id">{{ p.name }}</option>
+						</select>
+						<div class="text-danger" *ngIf="buyCoin.get('payment_method').errors && (buyCoin.get('payment_method').dirty || buyCoin.get('payment_method').touched)">
+							<p *ngIf="buyCoin.get('payment_method').errors['required']">This field can not be empty</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Buy Now</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideCoinBuyModal()">Close</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

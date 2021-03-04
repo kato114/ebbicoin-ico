@@ -1,0 +1,122 @@
+<header class="header">
+	<nav class="navbar navbar-default navbar-fixed-top opaque">
+		<div class="container">
+			<div class="navbar-header">
+				<button data-target="#navbar-collapse-02" data-toggle="collapse" class="navbar-toggle" type="button">
+					<span class="sr-only">Toggle navigation</span>
+					<img src="/assets/images/user-toggle-icon.png" alt="Toggle Navigation" />
+				</button>
+				<a href="javascript:void(0);" class="navbar-brand brand scroll"><img src="/assets/images/header-logo.png" alt="logo" /></a>
+			</div>
+			<div id="navbar-collapse-02" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="nav-home"><a href="#home_wrapper" class="scroll">HOME</a></li>
+					<li class="nav-road"><a href="#roadmap" class="scroll">ROADMAP</a></li>
+					<li><a href="#" title="White Paper" target="_blank">WHITEPAPER</a></li>
+					<li class="nav-contact"><a href="#" class="scroll">EXCHANGE</a></li>
+					<li class="nav-affiliate"><a href="#affiliate" class="scroll">AFFILIATE</a></li>
+					<li><a href="" data-toggle="modal" data-target="#login-modal" class="purchase btn-sign-up text-center">Participate In ICO</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+<section id="register">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-xs-12 col-md-offset-4">
+				<div class="register-block">
+					<form #model="ngForm" (ngSubmit)="registerSubmit(model.value)" [formGroup]="registerForm" id="form-register2" method="post" action="" novalidate>
+						<div class="card-header">
+							<h3 class="card-title text-center" style="color: rgb(238, 164, 58)">Register</h3>
+						</div>
+						<div class="card-body">
+							<p [innerHTML]="this.registerResponseText"></p>
+							<p *ngIf="this.registerStatus == 200">If you have not received the email, <a href="javascript:void(0);" (click)="resendEmail('register')">click here</a> to resend</p>
+							<input class="form-control" name="referral" placeholder="Enter Referral" style="border-radius: 0px" type="hidden" formControlName="referral" />
+							<div class="form-group">
+								<label class="control-label">
+									Username
+									<span>*</span>
+								</label>
+								<input class="form-control" name="username" placeholder="Enter username" style="border-radius: 0px" type="text" formControlName="username" />
+								<div class="text-danger" *ngIf="registerForm.get('username').errors && (registerForm.get('username').dirty || registerForm.get('username').touched)">
+									<p *ngIf="registerForm.get('username').errors['required']">Username can not be empty</p>
+									<p *ngIf="registerForm.get('username').errors['minlength']">Username must be 5 characters long</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label">
+									E-mail
+									<span>*</span>
+								</label>
+								<input class="form-control" name="email" placeholder="Email" style="border-radius: 0px" type="email" formControlName="email" />
+								<div class="text-danger" *ngIf="registerForm.get('email').errors && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+									<p *ngIf="registerForm.get('email').errors['required']">Email can not be empty</p>
+									<p *ngIf="registerForm.get('email').errors['email']">Please enter valid email address</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label">
+									Password
+									<span>*</span>
+								</label>
+								<input class="form-control" name="password" placeholder="Password" style="border-radius: 0px" type="password" formControlName="password" />
+								<div class="text-danger" *ngIf="registerForm.get('password').errors && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+									<p *ngIf="registerForm.get('password').errors['required']">Password can not be empty</p>
+									<p *ngIf="registerForm.get('password').errors['minLength']">Confirm Password must be 5 characters long</p>
+									<p *ngIf="registerForm.get('password').errors['pattern']">Password must contain at least one capital letter, one small letter, one number and one special character</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label">
+									Confirm Password
+									<span>*</span>
+								</label>
+								<input class="form-control" name="confPassword" placeholder="Confirm Password" style="border-radius: 0px" type="password" formControlName="confPassword" />
+								<div class="text-danger" *ngIf="registerForm.get('confPassword').errors && (registerForm.get('confPassword').dirty || registerForm.get('confPassword').touched)">
+									<p *ngIf="registerForm.get('confPassword').errors['required']">Confirm Password can not be empty</p>
+									<p *ngIf="registerForm.get('confPassword').errors['minLength']">Confirm Password must be 5 characters long</p>
+									<p *ngIf="cpwd.hasError('invalid')">Confirm Password did not match with password</p>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-warning btn-block" type="submit">Register</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="copyright">
+					<p class="footer-logo"><img src="/assets/images/header-logo.png" alt="logo" /></p>
+					<p>Copyright © 2021 Ebbicoin All rights reserved.</p>
+				</div>
+				<ul class="footer_social">
+					<li>
+						<a href="" target="_blank" title="Twitter">
+							<i class="fa fa-twitter"></i>
+						</a>
+					</li>
+					<li>
+						<a href="h" target="_blank" title="Facebook">
+							<i class="fa fa-facebook" style="padding: 8px 12px !important"></i>
+						</a>
+					</li>
+					<li>
+						<a href="" target="_blank" title="Telegram Social">
+							<i class="fa fa-telegram"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

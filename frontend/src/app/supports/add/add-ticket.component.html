@@ -1,0 +1,46 @@
+<div class="wrapper">
+	<app-sidebar></app-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<app-header></app-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-8">
+						<div class="card">
+							<form #addTicket="ngForm" (ngSubmit)="addNewTicket(addTicket.value)" [formGroup]="supportForm" id="form-add-ticket" method="post" action="" novalidate enctype="multipart/form-data">
+								<input type="hidden" formControlName="user_id" />
+								<div class="card-content">
+									<div class="card-header">
+										<h4 class="card-title">Submit a new Ticket</h4>
+										<p class="category">Please let us know what you need support with!</p>
+									</div>
+									<p [innerHTML]="this.supportResponseText"></p>
+									<div class="form-group">
+										<label for="title" class="">Title <span>*</span></label>
+										<input name="title" type="text" class="validate form-control" placeholder="Enter Ticket Title" formControlName="title" />
+										<div class="text-danger" *ngIf="supportForm.get('title').errors && (supportForm.get('title').dirty || supportForm.get('title').touched)">
+											<p *ngIf="supportForm.get('title').errors['required']">Title can not be empty</p>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="content" class="">Content <span>*</span></label>
+										<textarea class="form-control" rows="5" placeholder="Enter Ticket Details" formControlName="description"></textarea>
+										<div class="text-danger" *ngIf="supportForm.get('description').errors && (supportForm.get('description').dirty || supportForm.get('description').touched)">
+											<p *ngIf="supportForm.get('description').errors['required']">Description can not be empty</p>
+										</div>
+									</div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-success">Save</button>
+										&nbsp;
+										<a class="btn white" [routerLink]="['/supports']" [routerLinkActive]="['active']">Cancel</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<app-footer></app-footer>
+	</div>
+</div>

@@ -1,0 +1,155 @@
+/* Write your custom CSS here */
+
+body .nav-wrapper.row span.rate_detail {
+    font-size: 12px;
+    margin: 0 0 0 0px;
+    display: inline-block;
+    color: #fff;
+    font-weight: 400;
+}
+
+body .nav-wrapper.row span.rate_detail > b {
+    padding-right: 5px;
+}
+.font-weight-normal {
+    font-weight: 400 !important;
+}
+.font-lg-32 {
+    font-size: 32px;
+}
+.font-lg-26 {
+    font-size: 26px;
+}
+.external-link.small-box-footer > a {
+    color: #fff;
+    font-weight: 400;
+    font-size: 12px;
+    display: block;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 2px;
+    text-align: center;
+}
+.small-box .icon {
+    float: right;
+    font-size: 85px;
+    position: absolute;
+    bottom: 0;
+    color: rgba(255, 255, 255, 0.45);
+    right: 5px;
+}
+.small-box:hover .icon {
+    animation-name: tansformAnimation;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    -webkit-animation-name: tansformAnimation;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-name: tansformAnimation;
+    -moz-animation-duration: .5s;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: forwards;
+}
+
+@keyframes tansformAnimation {
+    from {
+        font-size: 90px;
+    }
+    to {
+        font-size: 100px;
+    }
+}
+@-webkit-keyframes tansformAnimation {
+    from {
+        font-size: 90px;
+    }
+    to {
+        font-size: 100px;
+    }
+}
+.progress {
+    position: relative;
+    height: 12px;
+    display: block;
+    width: 100%;
+    /*background-color: #acece6;*/
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    margin: 0.3rem 0 1rem 0;
+    overflow: hidden;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+}
+.stats-card-progress .determinate {
+    background: #f56954;
+    border-bottom-left-radius: 2px;
+    background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-image: -o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    -webkit-background-size: 40px 40px;
+    background-size: 40px 40px;
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+    -o-animation: progress-bar-stripes 2s linear infinite;
+    animation: progress-bar-stripes 2s linear infinite;
+}
+
+@-webkit-keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0
+    }
+    to {
+        background-position: 0 0
+    }
+}
+
+@-o-keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0
+    }
+    to {
+        background-position: 0 0
+    }
+}
+
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0
+    }
+    to {
+        background-position: 0 0
+    }
+}
+.primary-card .card-content {
+    padding: 0;
+}
+
+.primary-card .card-body {
+    padding: 10px 20px 20px;
+}
+
+.primary-card .card-content .card-title {
+    margin: 0;
+    background: #f3bb45;
+    color: #fff;
+    display: block;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 7px 20px;
+}
+
+.box-etherbanking{ border:1px solid #E4E6EB;}
+.box-etherbanking .ethe-v {float:right;width:68%;text-align:left;padding:7px 0px;line-height:25px}
+.box-etherbanking .ethe-v  span {font-size: 18px}
+.box-etherbanking .ethe-v a {text-decoration: none; color: rgb(66, 139, 202)}
+.box-etherbanking .logo-e {text-align:center;padding:5px 0px;width:32%}
+
+.box-etherbanking .view-bot {border-top: 1px solid #E4E6EB; overflow: hidden; clear:both}
+.box-etherbanking .view-bot .tr-view{text-align:center;float:left;width:33.33333%;font-size:12px;padding:12px 0;border-right:1px solid #E4E6EB;line-height:1.25em}
+.box-etherbanking .view-bot .tr-view:last-child {border:none}
+.padding-right-none {
+    padding-right: 0 !important;
+}

@@ -1,0 +1,237 @@
+<div class="wrapper">
+	<app-sidebar></app-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<app-header></app-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12 nav-multi-tabs">
+						<ul class="tabs nav nav-tabs" role="tablist" style="width: 100%">
+							<li role="presentation" class="active"><a aria-controls="profile-panel" role="tab" data-toggle="tab" href="#profile-panel" class="">Profile</a></li>
+							<li role="presentation" class=""><a aria-controls="twofactor-panel" role="tab" data-toggle="tab" href="#twofactor-panel" class="">Two factor authentication</a></li>
+							<li role="presentation" class=""><a aria-controls="change-password-panel" role="tab" data-toggle="tab" href="#change-password-panel" class="">Change Password</a></li>
+						</ul>
+					</div>
+					<div class="tab-content">
+						<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane active" role="tabpanel" id="profile-panel">
+							<div class="card">
+								<div class="card-content">
+									<p [innerHTML]="this.myAccountResponseText"></p>
+									<form #account="ngForm" (ngSubmit)="updateAccount(account.value)" [formGroup]="myAccountForm" id="form-my-account" method="post" action="" novalidate>
+										<div class="form-group">
+											<div class="row">
+												<label class="col-md-3">Referrer:</label>
+												<div class="col-md-9">
+													<input placeholder="Referrer" readonly class="form-control" type="text" formControlName="referral" />
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<label class="col-md-3">Username:</label>
+												<div class="col-md-9">
+													<input placeholder="Username" readonly class="form-control" type="text" formControlName="username" />
+													<div class="text-danger" *ngIf="myAccountForm.get('username').errors && (myAccountForm.get('username').dirty || myAccountForm.get('username').touched)">
+														<p *ngIf="myAccountForm.get('username').errors['required']">Username can not be empty</p>
+														<p *ngIf="myAccountForm.get('username').errors['minlength']">Username must be 5 characters long</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<label class="col-md-3">Email:</label>
+												<div class="col-md-9">
+													<input placeholder="Email" readonly class="form-control" type="text" formControlName="email" />
+													<div class="text-danger" *ngIf="myAccountForm.get('email').errors && (myAccountForm.get('email').dirty || myAccountForm.get('email').touched)">
+														<p *ngIf="myAccountForm.get('email').errors['required']">Email can not be empty</p>
+														<p *ngIf="myAccountForm.get('email').errors['email']">Please enter valid email address</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<label class="col-md-3">Phone Number:</label>
+												<div class="col-md-9">
+													<input name="phone" placeholder="Phone Number" class="form-control" type="text" formControlName="phone" />
+													<div class="text-danger" *ngIf="myAccountForm.get('phone').errors && (myAccountForm.get('phone').dirty || myAccountForm.get('phone').touched)">
+														<p *ngIf="myAccountForm.get('phone').errors['required']">Phone Number can not be empty</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<label class="col-md-3"></label>
+												<div class="col-md-9">
+													<button type="submit" class="btn btn-success"><i class="icon ion-paper-airplane"></i> Save</button>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane" role="tabpanel" id="twofactor-panel">
+							<div class="card">
+								<div class="card-content">
+									<div class="panel-border">
+										<div class="panel-body" *ngIf="this.tfa_status == 0">
+											<p [innerHTML]="this.tfaResponseText"></p>
+											<p>Protect your user account by entering the OTP code (to be generated on the application) every time you withdraw or release a transaction.</p>
+											<p>Please download and use Google Authenticator for <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" target="_blank">iOS</a> or <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=vi" target="_blank">Android</a>.</p>
+											<form #tfa="ngForm" (ngSubmit)="enable2FA(tfa.value)" [formGroup]="tfaForm" id="form-tfa" method="post" action="" novalidate>
+												<div class="text-center">
+													<p [innerHTML]="this.tfa_qr"></p>
+												</div>
+												<div class="form-group row">
+													<label for="example-text-input" class="col-md-2 col-form-label">Secret Key</label>
+													<div class="col-md-10">
+														<input class="form-control secret" placeholder="2FA Secret" formControlName="tfa_key" readonly type="text" />
+													</div>
+												</div>
+												<div class="form-group row">
+													This secret code only show for the first time. You need save it to another device or any where for recover. Your code is: <b>{{ this.tfa_key }}</b>
+												</div>
+												<div class="form-group row">
+													<label for="example-search-input" class="col-md-2 col-form-label">Pin (6 digit)</label>
+													<div class="col-md-10">
+														<input class="form-control pin" formControlName="authencode" type="text" />
+														<div class="text-danger" *ngIf="tfaForm.get('authencode').errors && (tfaForm.get('authencode').dirty || tfaForm.get('authencode').touched)">
+															<p *ngIf="tfaForm.get('authencode').errors['required']">Authentication Code can not be empty</p>
+															<p *ngIf="tfaForm.get('authencode').errors['minLength']">Authentication Code can not be less then 6 digit</p>
+															<p *ngIf="tfaForm.get('authencode').errors['maxLength']">Authentication Code can not be more then 6 digit</p>
+														</div>
+													</div>
+												</div>
+												<button type="submit" class="btn btn-success">Enabled 2FA</button>
+											</form>
+										</div>
+										<div class="panel-body" *ngIf="this.tfa_status == 1">
+											<p [innerHTML]="this.tfaResponseText"></p>
+											<span>If you want to turn off 2FA, input your account password and the code provided by the Google Authenticator app below, then click "Disable 2FA".</span>
+											<form #tfaDisable="ngForm" (ngSubmit)="disable2FA(tfaDisable.value)" [formGroup]="tfaDisableForm" id="form-tfa-disable" method="post" action="" novalidate>
+												<input class="form-control secret" placeholder="2FA Secret" formControlName="tfa_key" readonly type="hidden" />
+												<div class="enable_app_based_twofactor_area">
+													<div class="form-group">
+														<label for="disable_2fa_password" class="control-label">Password</label>
+														<div class="controls">
+															<input class="form-control" type="password" style="width: 250px" placeholder="Password" formControlName="password" />
+															<div class="text-danger" *ngIf="tfaDisableForm.get('password').errors && (tfaDisableForm.get('password').dirty || tfaDisableForm.get('password').touched)">
+																<p *ngIf="tfaDisableForm.get('password').errors['required']">Password can not be empty</p>
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="disable_2fa_token" class="control-label">Authentication Code</label>
+														<div class="controls">
+															<input class="form-control" type="text" style="width: 250px" placeholder="Six Digit Code" formControlName="authencode" />
+															<div class="text-danger" *ngIf="tfaDisableForm.get('authencode').errors && (tfaDisableForm.get('authencode').dirty || tfaDisableForm.get('authencode').touched)">
+																<p *ngIf="tfaDisableForm.get('authencode').errors['required']">Authentication Code can not be empty</p>
+																<p *ngIf="tfaDisableForm.get('authencode').errors['minLength']">Authentication Code can not be less then 6 digit</p>
+																<p *ngIf="tfaDisableForm.get('authencode').errors['maxLength']">Authentication Code can not be more then 6 digit</p>
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														<span><span style="color: red; font-weight: bold">IMPORTANT:</span> When you disable 2FA, any IP Access Restriction filters you have set will be disabled on all of your API keys. The withdrawal privilege will also be revoked from these keys.</span>
+														<br />
+														<span style="color: red"> Yes! </span><span>I understand how this will affect.</span>
+														<br />
+														<br />
+														<button type="submit" class="btn btn-warning">Disable 2FA</button>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="panel-body" *ngIf="this.tfa_status == 2">
+											<p [innerHTML]="this.tfaResponseText"></p>
+											<p>Protect your user account by entering the OTP code (to be generated on the application) every time you withdraw or release a transaction.</p>
+											<p>Please download and use Google Authenticator for <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" target="_blank">iOS</a> or <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=vi" target="_blank">Android</a>.</p>
+											<form #tfaDeactivate="ngForm" (ngSubmit)="deactivate2FA(tfaDeactivate.value)" [formGroup]="tfaDeactivateForm" id="form-tfa-deactivate" method="post" action="" novalidate>
+												<input class="form-control secret" placeholder="2FA Secret" formControlName="tfa_key" readonly type="hidden" />
+												<div class="form-group row">
+													<label for="example-search-input" class="col-md-2 col-form-label">Pin (6 digit)</label>
+													<div class="col-md-10">
+														<input class="form-control pin" formControlName="authencode" type="text" />
+														<div class="text-danger" *ngIf="tfaDeactivateForm.get('authencode').errors && (tfaDeactivateForm.get('authencode').dirty || tfaDeactivateForm.get('authencode').touched)">
+															<p *ngIf="tfaDeactivateForm.get('authencode').errors['required']">Authentication Code can not be empty</p>
+															<p *ngIf="tfaDeactivateForm.get('authencode').errors['minLength']">Authentication Code can not be less then 6 digit</p>
+															<p *ngIf="tfaDeactivateForm.get('authencode').errors['maxLength']">Authentication Code can not be more then 6 digit</p>
+														</div>
+													</div>
+												</div>
+												<button type="submit" class="btn btn-success">Enabled 2FA</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.tab-pane -->
+						</div>
+						<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane" role="tabpanel" id="change-password-panel">
+							<div class="card">
+								<div class="card-content">
+									<p [innerHTML]="this.changePwdResponseText"></p>
+									<form #changePwd="ngForm" (ngSubmit)="changePassword(changePwd.value)" [formGroup]="changePwdForm" id="form-change-password" method="post" action="" novalidate>
+										<div class="form-group">
+											<div class="row">
+												<label class="col-md-2">Password</label>
+												<div class="col-md-10">
+													<input class="form-control" placeholder="Enter current password" type="password" pattern="^.*(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+])[a-zA-Z0-9!@#$%]+$" formControlName="currentPassword" />
+													<div class="text-danger" *ngIf="changePwdForm.get('currentPassword').errors && (changePwdForm.get('currentPassword').dirty || changePwdForm.get('currentPassword').touched)">
+														<p *ngIf="changePwdForm.get('currentPassword').errors['required']">Current Password can not be empty</p>
+														<p *ngIf="changePwdForm.get('currentPassword').errors['pattern']">Current Password must contain at least one capital letter, one small letter, one number and one special character</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<label class="col-md-2">New Password</label>
+												<div class="col-md-10">
+													<input class="form-control" placeholder="Enter new password" type="password" pattern="^.*(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+])[a-zA-Z0-9!@#$%]+$" formControlName="newPassword" />
+													<div class="text-danger" *ngIf="changePwdForm.get('newPassword').errors && (changePwdForm.get('newPassword').dirty || changePwdForm.get('newPassword').touched)">
+														<p *ngIf="changePwdForm.get('newPassword').errors['required']">New Password can not be empty</p>
+														<p *ngIf="changePwdForm.get('newPassword').errors['pattern']">New Password must contain at least one capital letter, one small letter, one number and one special character</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<label class="col-md-2">Confirm Password</label>
+												<div class="col-md-10">
+													<input class="form-control" placeholder="Enter confirm Password" type="password" pattern="^.*(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+])[a-zA-Z0-9!@#$%]+$" formControlName="confPassword" />
+													<div class="text-danger" *ngIf="changePwdForm.get('confPassword').errors && (changePwdForm.get('confPassword').dirty || changePwdForm.get('confPassword').touched)">
+														<p *ngIf="changePwdForm.get('confPassword').errors['required']">Confirm Password can not be empty</p>
+														<p *ngIf="changePwdForm.get('confPassword').errors['pattern']">Confirm Password must contain at least one capital letter, one small letter, one number and one special character</p>
+														<p *ngIf="cpwd.hasError('invalid')">Confirm Password did not match with new password</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<label class="col-md-2"></label>
+												<div class="col-md-10">
+													<div class="btn_deposit">
+														<button type="submit" class="btn btn-success pull-left">Save</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<app-footer></app-footer>
+	</div>
+</div>

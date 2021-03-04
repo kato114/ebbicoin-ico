@@ -1,0 +1,79 @@
+<div class="wrapper">
+	<admin-sidebar></admin-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<admin-header></admin-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row" *ngIf="!is_busy">
+					<div class="col col-sm-12">
+						<div class="page-title">Your Ticket Details</div>
+					</div>
+					<div class="col col-sm-12 col-md-12 col-lg-12">
+						<div class="card">
+							<div class="card-content">
+								<div class="panel">
+									<div class="panel-heading">
+										<strong>{{ this.ticket.title }}</strong
+										>(<small>{{ this.ticket.created_at }}</small
+										>)
+										<button *ngIf="this.ticket.status == 0" class="btn btn-info btn-xs" (click)="closeTicket(this.ticket.id)">Support Response Needed</button>
+										<button *ngIf="this.ticket.status == 1" class="btn btn-success btn-xs" (click)="closeTicket(this.ticket.id)">Waiting for User Response</button>
+										<button *ngIf="this.ticket.status == 2" class="btn btn-danger btn-xs">Closed</button>
+									</div>
+									<div class="panel-body content">
+										<div class="form-group">{{ this.ticket.description }}</div>
+										<div class="form-group"></div>
+									</div>
+								</div>
+								<div class="panel">
+									<div class="form-group" *ngFor="let c of this.comments; let i = index">
+										<div class="form-group">
+											<b>{{ c.username }}</b> (<small>{{ c.created_at }}</small
+											>)
+										</div>
+										<div class="form-group">{{ c.comment }}</div>
+										<hr />
+									</div>
+								</div>
+								<div class="" *ngIf="this.ticket.status != 2">
+									<div class="panel">
+										<div class="panel-heading">Add more comment</div>
+										<div class="panel-body">
+											<form #addComment="ngForm" (ngSubmit)="addNewComment(addComment.value)" [formGroup]="commentForm" id="form-add-comment" method="post" action="" novalidate enctype="multipart/form-data">
+												<input type="hidden" formControlName="user_id" />
+												<input type="hidden" formControlName="ticket_id" />
+												<div class="form-group">
+													<div class="row">
+														<label class="col-md-2">Content</label>
+														<div class="col-md-10">
+															<textarea class="form-control" formControlName="comment"></textarea>
+															<div class="text-danger" *ngIf="commentForm.get('comment').errors && (commentForm.get('comment').dirty || commentForm.get('comment').touched)">
+																<p *ngIf="commentForm.get('comment').errors['required']">Comment can not be empty</p>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<label class="col-md-2"></label>
+														<div class="col-md-10">
+															<div class="btn_deposit">
+																<button type="submit" class="btn btn-blue pull-left">Add Comment</button>&nbsp;
+																<a class="btn btn-danger pull-left" [routerLink]="['/admin/supports']" [routerLinkActive]="['active']">Back to Tickets</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<admin-footer></admin-footer>
+	</div>
+</div>

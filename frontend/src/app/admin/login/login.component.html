@@ -1,0 +1,52 @@
+<link rel="stylesheet" type="text/css" href="/assets/user/css/paper-dashboard.css">
+<link rel="stylesheet" type="text/css" href="/assets/user/css/cryptocoins.css">
+<link rel="stylesheet" type="text/css" href="/assets/user/font/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="/assets/user/css/style.css">
+
+<div class="wrapper wrapper-full-page">
+    <div class="full-page login-page " data-color="" data-image="/assets/user/img/login.jpg">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                        <form #login="ngForm" (ngSubmit)="loginSubmit(login.value)" [formGroup]="loginForm" id="form-login" method="post" action="#" novalidate="">
+                            <div class="card" data-background="color" data-color="blue">
+                                <div class="card-content">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Login</h3>
+                                    </div>
+                                    <p [innerHTML]="this.loginResponseText"></p>
+                                    <div class="form-group" [ngClass]="displayFieldCss('username', loginForm)">
+                                        <label class="control-label">Username
+                                            <span>*</span>
+                                        </label>
+                                        <input class="form-control" name="username" placeholder="Enter username" type="text" formControlName="username" autofocus>
+                                        <app-field-error-display [displayError]="isFieldValid('username', loginForm)" errorMsg="Please enter password"></app-field-error-display>
+                                    </div>
+                                    <div class="form-group" [ngClass]="displayFieldCss('password', loginForm)">
+                                        <label class="control-label">Password
+                                            <span>*</span>
+                                        </label>
+                                        <input class="form-control" name="password" placeholder="Password" type="password" formControlName="password">
+                                        <app-field-error-display [displayError]="isFieldValid('password', loginForm)" errorMsg="Please enter password"></app-field-error-display>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <button class="btn btn-fill btn-wd btn-block" type="submit">Login Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer footer-transparent">
+            <div class="container">
+                <div class="copyright">
+                    Copyright ©2017 EBBICOIN.COM
+                </div>
+            </div>
+        </footer>
+        <div class="full-page-background" style="background-image: url(/assets/user/img/login.jpg) "></div>
+    </div>
+</div>

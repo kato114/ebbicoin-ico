@@ -1,0 +1,56 @@
+<div class="wrapper">
+	<admin-sidebar></admin-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<admin-header></admin-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col col-sm-12 col-md-12 col-lg-12">
+						<div class="card">
+							<div class="card-content">
+								<div class="card-header">
+									<div class="row">
+										<div class="col-md-9">
+											<h4 class="card-title">Round {{ round }}</h4>
+											<p class="category">All your submitted tickets</p>
+										</div>
+										<div class="col-md-3">
+											<input type="text" [(ngModel)]="term" class="form-control" placeholder="Search" />
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<div id="example_wrapper" class="dataTables_wrapper table-responsive">
+										<table class="display responsive-table table datatable-example dataTable">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Username</th>
+													<th>Email Address</th>
+													<th>Received Ether</th>
+													<th>Purchased Coin</th>
+													<th>Created At</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr *ngFor="let r of this.rounds | filter: term; let i = index">
+													<td>{{ i + 1 }}</td>
+													<td>{{ r.username }}</td>
+													<td>{{ r.email }}</td>
+													<td>{{ r.send_quantity }}</td>
+													<td>{{ r.receive_quantity }}</td>
+													<td>{{ r.created_at }}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<admin-footer></admin-footer>
+	</div>
+</div>

@@ -1,0 +1,89 @@
+<link rel="stylesheet" type="text/css" href="/assets/user/css/paper-dashboard.css" />
+<link rel="stylesheet" type="text/css" href="/assets/user/css/cryptocoins.css" />
+<link rel="stylesheet" type="text/css" href="/assets/user/font/themify-icons/themify-icons.css" />
+<link rel="stylesheet" type="text/css" href="/assets/user/css/style.css" />
+
+<div class="sidebar" data-active-color="danger">
+	<div class="logo">
+		<a href="" class="simple-text logo-mini"> <img src="/assets/user/img/logo-36x36.png" style="width: 26px" alt="EBBICOIN" /> </a>
+		<div class="text-logo">
+			<a href="" class="simple-text logo-normal"> EBBICOIN </a> <a href="javascript:void(0);" class="simple-text logo-normal back-home"> <i class="fa fa-home"></i> </a>
+		</div>
+	</div>
+	<div class="sidebar-wrapper ps-container ps-theme-default ps-active-x" data-ps-id="f15df5a3-7978-837d-0084-94384754f131">
+		<div class="user">
+			<div class="info">
+				<div class="photo"><img src="/assets/user/img/face.png" alt="" /></div>
+				<a data-toggle="collapse" href="#collapseExample" class="collapsed">
+					<span>{{ this.username }}<b class="caret"></b></span>
+				</a>
+				<div class="clearfix"></div>
+				<div class="collapse" id="collapseExample">
+					<ul class="nav">
+						<li>
+							<a [routerLink]="['/admin/change-password']" [routerLinkActive]="['active']"> <span class="sidebar-mini">&nbsp;</span> <span class="sidebar-normal">Change Password</span> </a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" (click)="logout()"> <span class="sidebar-mini">&nbsp;</span> <span class="sidebar-normal">Logout</span> </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<ul class="nav" data-collapsible="accordion">
+			<li [ngClass]="{ active: this.page == '/admin/dashboard' }">
+				<a [routerLink]="['/admin/dashboard']" [routerLinkActive]="['active']">
+					<i class="fa fa-dashboard"></i>
+					<p>Dashboard</p></a
+				>
+			</li>
+			<li [ngClass]="{ active: this.page == '/admin/users' || this.page == '/admin/user/add' || this.page == '/admin/user/edit' }">
+				<a [routerLink]="['/admin/users']" [routerLinkActive]="['active']">
+					<i class="fa fa-users"></i>
+					<p>Users</p></a
+				>
+			</li>
+			<li [ngClass]="{ active: this.page == '/admin/supports' }">
+				<a [routerLink]="['/admin/supports']" [routerLinkActive]="['active']">
+					<i class="fa fa-question-circle"></i>
+					<p>Supports</p></a
+				>
+			</li>
+			<li>
+				<a data-toggle="collapse" href="#ebbicoinSale">
+					<i class="fa fa-shopping-cart"></i>
+					<p>Ebbi Sale<b class="caret"></b></p
+				></a>
+				<div class="collapse" id="ebbicoinSale">
+					<ul class="nav">
+						<li class="">
+							<a [routerLink]="['/admin/round/0']" [routerLinkActive]="['active']">
+								<span class="sidebar-mini"><i class="fa fa-shopping-cart"></i></span><span class="sidebar-normal">Pre Sale</span>
+							</a>
+						</li>
+						<li class="">
+							<a [routerLink]="['/admin/round/1']">
+								<span class="sidebar-mini"><i class="fa fa-shopping-cart"></i></span><span class="sidebar-normal">Round 1</span>
+							</a>
+						</li>
+						<li class="">
+							<a [routerLink]="['/admin/round/2']">
+								<span class="sidebar-mini"><i class="fa fa-shopping-cart"></i></span><span class="sidebar-normal">Round 2</span>
+							</a>
+						</li>
+						<li class="">
+							<a [routerLink]="['/admin/round/3']">
+								<span class="sidebar-mini"><i class="fa fa-shopping-cart"></i></span><span class="sidebar-normal">Round 3</span>
+							</a>
+						</li>
+						<li class="">
+							<a [routerLink]="['/admin/round/4']">
+								<span class="sidebar-mini"><i class="fa fa-shopping-cart"></i></span><span class="sidebar-normal">Round 4</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

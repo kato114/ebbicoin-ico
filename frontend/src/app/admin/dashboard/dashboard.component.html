@@ -1,0 +1,152 @@
+<div class="wrapper">
+	<admin-sidebar></admin-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<admin-header></admin-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="card">
+							<div class="card-content">
+								<div class="card-body">
+									<h3 class="text-center">Welcome to EbbiCoin Admin</h3>
+									<p class="text-center">ETH Balance = {{ this.eth_balance }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-content">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="icon-big btc-color text-center"><i class="cc BTC"></i></div>
+										</div>
+										<div class="col-xs-7">
+											<div class="numbers">
+												<p>Total Accounts</p>
+												<span id="index-btc-amount">{{ this.accounts }}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-content">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="icon-big eth-color text-center"><i class="cc ETH"></i></div>
+										</div>
+										<div class="col-xs-7">
+											<div class="numbers">
+												<p>Active Accounts</p>
+												<span id="index-eth-amount">{{ this.active_accounts }}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-content">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="icon-big bch-color text-center"><i class="cc BCH-alt"></i></div>
+										</div>
+										<div class="col-xs-7">
+											<div class="numbers">
+												<p>EbbiCoins</p>
+												<span id="index-bch-amount">{{ this.ebbicoins }}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-content">
+									<div class="row">
+										<div class="col-xs-5">
+											<div class="icon-big icon-success text-center"><i class="ti-wallet"></i></div>
+										</div>
+										<div class="col-xs-7">
+											<div class="numbers">
+												<p>ETH Transfered</p>
+												<span id="index-EBBI  -amount">{{ this.eth_transfered }}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="card">
+							<div class="card-content">
+								<div class="card-header">
+									<h4 class="card-title">Transfer ETH</h4>
+								</div>
+								<div class="card-body">
+									<form #transaction="ngForm" (ngSubmit)="transactionSubmit(transaction.value)" [formGroup]="transactionForm">
+										<div class="row">
+											<span [innerHTML]="this.responseText"></span>
+											<div class="col-md-5">
+												<input type="text" class="form-control" placeholder="Address" formControlName="address" />
+												<app-field-error-display [displayError]="isFieldValid('address', transactionForm)" errorMsg="Please enter address"></app-field-error-display>
+											</div>
+											<div class="col-md-5">
+												<input type="text" class="form-control" placeholder="Amount" formControlName="amount" />
+												<app-field-error-display [displayError]="isFieldValid('amount', transactionForm)" errorMsg="Please enter amount"></app-field-error-display>
+											</div>
+											<div class="col-md-2">
+												<input type="submit" class="btn btn-warning btn-block" />
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="card">
+							<div class="card-content">
+								<div class="card-header">
+									<h4 class="card-title">Current Stage</h4>
+								</div>
+								<div class="card-body">
+									<form #stage="ngForm" (ngSubmit)="stageSubmit(stage.value)" [formGroup]="stageForm">
+										<div class="row">
+											<span [innerHTML]="this.stageText"></span>
+											<div class="col-md-5">
+												<select name="stage" id="stage" class="form-control" formControlName="stage">
+													<option value="0">Pre-ICO</option>
+													<option value="1">Frist round</option>
+													<option value="2">Second round</option>
+													<option value="3">Third round</option>
+													<option value="4">Fourth round</option>
+												</select>
+											</div>
+											<div class="col-md-5">
+												<input type="text" class="form-control" placeholder="price" formControlName="price" />
+												<app-field-error-display [displayError]="isFieldValid('price', stageForm)" errorMsg="Please enter current stage price"></app-field-error-display>
+											</div>
+											<div class="col-md-2">
+												<input type="submit" class="btn btn-warning btn-block" />
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<admin-footer></admin-footer>
+	</div>
+</div>

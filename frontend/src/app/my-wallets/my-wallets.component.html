@@ -1,0 +1,355 @@
+<div class="wrapper">
+	<app-sidebar></app-sidebar>
+	<div class="main-panel ps-theme-default ps-active-y" data-ps-id="d230faa5-5343-f81e-fbf7-5f8bea02025e">
+		<app-header></app-header>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="row">
+							<!-- <div class="col-sm-6 col-lg-3">
+								<div class="card">
+									<div class="card-content">
+										<div class="row">
+											<div class="col-xs-5">
+												<div class="icon-big btc-color text-center"> <i class="cc BTC"></i> </div>
+											</div>
+											<div class="col-xs-7">
+												<div class="numbers">
+													<p>BTC Wallet</p>
+													<span id="index-btc-amount">{{ this.balance.btc_balance }}</span> 
+												</div>
+											</div>
+										</div>
+										<div class="card-footer">
+											<hr>
+											<div class="stats"> <i class="fa fa-refresh"></i> <a href="javascript:void(0);" class="btn-refresh-transactions">Update Balance</a> </div>
+										</div>
+									</div>
+								</div>
+							</div> -->
+							<div class="col-sm-6 col-lg-3">
+								<div class="card">
+									<div class="card-content">
+										<div class="row">
+											<div class="col-xs-5">
+												<div class="icon-big eth-color text-center"><i class="cc ETH"></i></div>
+											</div>
+											<div class="col-xs-7">
+												<div class="numbers">
+													<p>ETH Wallet</p>
+													<span id="index-eth-amount">{{ this.balance.eth_balance }}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer">
+										<hr />
+										<div class="stats"><i class="fa fa-refresh"></i> <a href="javascript:void(0);" class="btn-refresh-transactions" (click)="getUserBalance()">Update Balance</a></div>
+									</div>
+								</div>
+							</div>
+							<!--	<div class="col-sm-6 col-lg-3">
+								<div class="card">
+									<div class="card-content">
+										<div class="row">
+											<div class="col-xs-5">
+												<div class="icon-big bch-color text-center"> <i class="cc BCH-alt"></i> </div>
+											</div>
+											<div class="col-xs-7">
+												<div class="numbers">
+													<p>BCH Wallet</p>
+													<span id="index-bch-amount">{{ this.balance.bch_balance }}</span> 
+												</div>
+											</div>
+										</div>
+										<div class="card-footer">
+											<hr>
+											<div class="stats"> <i class="fa fa-refresh"></i> <a href="javascript:void(0);" class="btn-refresh-transactions" (click)="getUserBalance()">Update Balance</a> </div>
+										</div>
+									</div>
+								</div>
+							</div> -->
+							<div class="col-sm-6 col-lg-3">
+								<div class="card">
+									<!-- small box -->
+									<div class="card-content">
+										<div class="row">
+											<div class="col-xs-5">
+												<div class="icon-big icon-success text-center"><i class="ti-wallet"></i></div>
+											</div>
+											<div class="col-xs-7">
+												<div class="numbers">
+													<p>EBBI Wallet</p>
+													<span id="index-EBBI  -amount">{{ this.balance.ebbi_balance }}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer">
+										<hr />
+										<div class="stats"><i class="fa fa-refresh"></i> <a href="javascript:void(0);" class="btn-refresh-transactions" (click)="getUserBalance()">Update Balance</a></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row nav-multi-tabs">
+							<div class="col col-sm-12 col-md-12 col-lg-6 bitcoin-wallet wallets-col">
+								<ul class="nav nav-tabs tabs" style="width: 100%">
+									<li role="presentation" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 active"><a href="#eth-wallet-card" class="active card-title" aria-controls="eth-wallet-card" role="tab" data-toggle="tab" aria-expanded="false">ETH Wallet</a></li>
+									<li role="presentation" class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a href="#btc-wallet-card" class="card-title" aria-controls="btc-wallet-card" role="tab" data-toggle="tab" aria-expanded="true">BTC Wallet</a></li>
+									<li role="presentation" class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a href="#bch-wallet-card" class="card-title" aria-controls="bch-wallet-card" role="tab" data-toggle="tab" aria-expanded="false">BCH Wallet</a></li>
+								</ul>
+								<div class="tab-content">
+									<div id="btc-wallet-card" role="tabpanel" class="tab-pane card visitors-card primary-card">
+										<div class="card-content">
+											<div class="card-body box-body bootstrap-iso">
+												<div class="row">
+													<div class="col col-md-12">
+														<h3 class="text-center text-info">Coming Soon</h3>
+													</div>
+													<!-- <div class="col col-md-12  col-sm-12">
+														<button class="btn btn-success btn-refresh-transactions"> <span class="btn-label"><i class="fa fa-refresh"></i></span> Update Balance </button>
+														<h3 class="wallet-sub-title">Receive Bitcoin (BTC)</h3>
+														<p class="description">Get address to accept Bitcoin payments</p>
+														<a class="btn btn-warning btn-fill btn-wd" data-toggle="modal" href="#btc-deposit-modal" id="btc-deposit">Deposit Bitcoin (BTC)</a> 
+													</div>
+													<div class="col col-md-12  col-sm-12">
+														<h3 class="wallet-sub-title">Send Bitcoin (BTC)</h3>
+														<form action="/bitcoin-wallet/withdraw" id="send-btc-form" method="POST" novalidate>
+															<input name="d2VOSWdObm9VUTJ1algrWlltaFRMdz09" value="YWNjekpIL2hpWTNPcWZ5SkwzMExodz09" type="hidden">
+															<div class="form-group">
+																<label for="btcAddress">To Address</label>
+																<input name="self_address" placeholder="BTC Address" id="btcAddress" class="form-control" value="" type="text">
+															</div>
+															<div class="form-group">
+																<label for="amountOfBtc">Amount of BTC</label>
+																<input step="any" name="amount" placeholder="Amount BTC" id="amountOfBtc" aria-describedby="amountBtcHelp" class="form-control" value="" type="number">
+																<small id="amountBtcHelp" class="form-text text-muted">Transaction fee: 0.0005 BTC</small> 
+															</div>
+															<div class="form-group">
+																<label for="password">Password</label>
+																<input placeholder="Password" id="password" name="password" class="form-control" type="password">
+															</div>
+															<div class="form-group">
+																<button type="submit" class="btn btn-success white-text submit">Withdraw Bitcoin</button>
+																<p class="text-muted ico-notifications" style="display: block !important;"><strong>Alert:</strong> You must buy at least 50 EbbiCoin to be able to withdraw your remaining BTC. If not, BTC can only be withdrawn after ICO.</p>
+															</div>
+														</form>
+													</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+									<div id="eth-wallet-card" role="tabpanel" class="tab-pane card visitors-card primary-card active">
+										<div class="card-content">
+											<div class="card-body box-body bootstrap-iso">
+												<div class="row text-center" *ngIf="this.user.eth_address == null">
+													<button class="btn btn-success" (click)="createEthereumWallet()">Create Ethereum Wallet</button>
+												</div>
+												<div class="row" *ngIf="this.user.eth_address != null">
+													<div class="col col-md-12 col-sm-12">
+														<h3 class="wallet-sub-title">Receive Ethereum (ETH)</h3>
+														<p class="description">Get address to accept Ethereum payments</p>
+														<a class="btn btn-warning btn-fill btn-wd" href="javascript:void(0);" id="btc-deposit" (click)="showAddressModal()">Deposit Ethereum (ETH)</a>
+													</div>
+													<div class="col col-md-12 col-sm-12">
+														<h3 class="wallet-sub-title">Send Ethereum (ETH)</h3>
+														<p [innerHTML]="this.sendEthereumText"></p>
+														<form action="#" #transferE="ngForm" (ngSubmit)="transferEther(transferE.value)" [formGroup]="transferEtherForm" id="send-eth-form" method="POST" novalidate>
+															<div class="form-group">
+																<label for="ethAddress">To Address</label>
+																<input formControlName="address" name="address" placeholder="ETH Address" id="ethAddress" class="form-control" value="" type="text" />
+																<div class="text-danger" *ngIf="transferEtherForm.get('address').errors && (transferEtherForm.get('address').dirty || transferEtherForm.get('address').touched)">
+																	<p class="text-small" *ngIf="transferEtherForm.get('address').errors['required']"><small>To address can not be empty.</small></p>
+																</div>
+															</div>
+															<div class="form-group">
+																<label for="amountOfEth">Amount of ETH</label>
+																<input formControlName="amount" name="amount" placeholder="Amount ETH" id="amountOfEth" aria-describedby="amountEthHelp" class="form-control" value="" type="number" />
+																<div class="text-danger" *ngIf="transferEtherForm.get('amount').errors && (transferEtherForm.get('amount').dirty || transferEtherForm.get('amount').touched)">
+																	<p class="text-small" *ngIf="transferEtherForm.get('amount').errors['required']"><small>Sending amount can not be empty.</small></p>
+																	<p class="text-small" *ngIf="transferEtherForm.get('amount').errors['min']"><small>Sending amount can not be less than zero.</small></p>
+																</div>
+															</div>
+															<div class="form-group">
+																<label for="ethPassword">Password</label>
+																<input formControlName="password" placeholder="Password" id="ethPassword" name="password" class="form-control" type="password" />
+																<div class="text-danger" *ngIf="transferEtherForm.get('password').errors && (transferEtherForm.get('password').dirty || transferEtherForm.get('password').touched)">
+																	<p class="text-small" *ngIf="transferEtherForm.get('password').errors['required']"><small>Password can not be empty.</small></p>
+																</div>
+															</div>
+															<div class="form-group">
+																<button type="submit" class="btn btn-success white-text submit">Withdraw Ethereum</button>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div id="bch-wallet-card" role="tabpanel" class="tab-pane card visitors-card primary-card">
+										<div class="card-content">
+											<div class="card-body box-body bootstrap-iso">
+												<div class="row">
+													<div class="col col-md-12">
+														<h3 class="text-center text-info">Coming Soon</h3>
+													</div>
+													<!-- <div class="col col-md-12  col-sm-12">
+														<button class="btn btn-success btn-refresh-transactions"> <span class="btn-label"><i class="fa fa-refresh"></i></span> Update Balance </button>
+														<h3 class="wallet-sub-title">Receive Bitcoin Cash <span class="short-title">(BCH)</span></h3>
+														<p class="description">Get address to accept Bitcoin Cash payments</p>
+														<a class="btn btn-warning btn-fill btn-wd" data-toggle="modal" href="#bch-deposit-modal" id="bch-deposit">Deposit Bitcoin Cash (BCH)</a> 
+													</div>
+													<div class="col col-md-12  col-sm-12">
+														<h3 class="wallet-sub-title">Send Bitcoin Cash (BCH)</h3>
+														<form action="#" id="send-bch-form" method="POST" novalidate>
+															<input name="d2VOSWdObm9VUTJ1algrWlltaFRMdz09" value="YWNjekpIL2hpWTNPcWZ5SkwzMExodz09" type="hidden">
+															<div class="form-group">
+																<label for="bchAddress">To Address</label>
+																<input name="self_address" placeholder="BCH Address" id="bchAddress" class="form-control" value="" type="text">
+															</div>
+															<div class="form-group">
+																<label for="amountOfBch">Amount of BCH</label>
+																<input step="any" name="amount" placeholder="Amount BCH" id="amountOfBch" aria-describedby="amountBchHelp" class="form-control" value="" type="number">
+																<small id="amountBchHelp" class="form-text text-muted">Transaction fee: 0.0005 BCH</small> 
+															</div>
+															<div class="form-group">
+																<label for="bchPassword">Password</label>
+																<input placeholder="Password" id="bchPassword" name="password" class="form-control" type="password">
+															</div>
+															<div class="form-group">
+																<button type="button" class="btn btn-success white-text submit">Withdraw Bitcoin Cash</button>
+																<p class="text-muted ico-notifications" style="display: block !important;"><strong>Alert:</strong> You must buy at least 50 JGC to be able to withdraw your remaining BCH. If not, BCH can only be withdrawn after ICO.</p>
+															</div>
+														</form>
+													</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col col-sm-12 col-md-12 col-lg-6 EbbiCoin-wallet wallets-col">
+								<ul class="nav nav-tabs tabs" style="width: 100%">
+									<li role="presentation" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 active"><a href="#eth-wallet-card" class="active card-title" aria-controls="eth-wallet-card" role="tab" data-toggle="tab" aria-expanded="false">Send EbbiCoin to another user</a></li>
+								</ul>
+								<div id="EbbiCoin-wallet-card" class="card visitors-card primary-card">
+									<div class="card-content">
+										<div class="card-body box-body countdown-card bootstrap-iso">
+											<div class="row">
+												<div class="col col-md-12 col-sm-12">
+													<p [innerHTML]="this.loginResponseText"></p>
+													<form action="#" #transfer="ngForm" (ngSubmit)="transferCoin(transfer.value)" [formGroup]="transferForm" method="post" id="send-EbbiCoin-form" novalidate>
+														<input name="d2VOSWdObm9VUTJ1algrWlltaFRMdz09" value="d2VOSWdObm9VUTJ1algrWlltaFRMdz09" type="hidden" />
+														<div class="form-group">
+															<label for="EbbiCoinAddress">Receiver Username</label>
+															<input formControlName="username" name="username" placeholder="Receiver Username" id="receiverUsername" class="form-control" type="text" />
+															<div class="text-danger" *ngIf="transferForm.get('username').errors && (transferForm.get('username').dirty || transferForm.get('username').touched)">
+																<p class="text-small" *ngIf="transferForm.get('username').errors['required']"><small>Username can not be empty.</small></p>
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="amountOfEbbiCoin">EbbiCoin amount</label>
+															<input formControlName="amount" step="any" name="amount" placeholder="Amount EbbiCoin" id="amountOfEbbiCoin" aria-describedby="amountEbbiCoinHelp" class="form-control" type="number" />
+															<small id="amountEbbiCoinHelp" class="form-text text-muted">Transaction fee: 0.0000 EbbiCoin</small>
+															<div class="text-danger" *ngIf="transferForm.get('amount').errors && (transferForm.get('amount').dirty || transferForm.get('amount').touched)">
+																<p class="text-small" *ngIf="transferForm.get('amount').errors['required']"><small>Sending amount can not be empty.</small></p>
+																<p class="text-small" *ngIf="transferForm.get('amount').errors['min']"><small>Sending amount can not be less than zero.</small></p>
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="EbbiCoinPassword">Password</label>
+															<input formControlName="password" placeholder="Password" id="EbbiCoinPassword" name="password" class="form-control" type="password" />
+															<div class="text-danger" *ngIf="transferForm.get('password').errors && (transferForm.get('password').dirty || transferForm.get('password').touched)">
+																<p class="text-small" *ngIf="transferForm.get('password').errors['required']"><small>Password can not be empty.</small></p>
+															</div>
+														</div>
+														<div class="form-group">
+															<button type="submit" class="btn btn-success white-text submit">Transfer EbbiCoin</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="row nav-multi-tabs" id="transaction-history">
+							<div class="col-sm-12 col-md-12 col-lg-12">
+								<ul class="tabs nav nav-tabs" role="tablist" style="width: 100%;">
+									<li role="presentation" class="active col-xs-12 col-sm-4 col-md-4 col-lg-4"> <a aria-controls="transactions-deposit" role="tab" data-toggle="tab" href="#transactions-deposit">BTC/ETH/BCH Deposit Transactions</a> </li>
+									<li role="presentation" class="col-xs-12 col-sm-4 col-md-4 col-lg-4"> <a aria-controls="transactions-withdraw-btc" role="tab" data-toggle="tab" href="#transactions-withdraw-btc" class="">BTC/ETH/BCH Withdraw Transactions</a> </li>
+									<li role="presentation" class="col-xs-12 col-sm-4 col-md-4 col-lg-4"> <a aria-controls="transactions-EbbiCoin" role="tab" data-toggle="tab" href="#transactions-EbbiCoin" class="">EbbiCoin Transactions</a> </li>
+								</ul>
+							</div>
+							<div class="tab-content">
+								<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane active" role="tabpanel" id="transactions-deposit">
+									<div class="card">
+										<div class="card-content">
+											<button class="blue darken btn" id="btn-update-btc-deposit">Update Transactions</button>
+											<div class="dataTables_wrapper table-responsive" style="padding-top: 5px;"> </div>
+										</div>
+									</div>
+								</div>
+								<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane" role="tabpanel" id="transactions-withdraw-btc">
+									<div class="card">
+										<div class="card-content">
+											<div class="table-responsive dataTables_wrapper">
+												<p class="center-align">You have no transactions.</p>
+												<table class="display responsive-table table datatable-example dataTable">
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col col-sm-12 col-md-12 col-lg-12 tab-pane" role="tabpanel" id="transactions-EbbiCoin">
+									<div class="card">
+										<div class="card-content">
+											<div class="table-responsive dataTables_wrapper">
+												<p class="center-align">You have no transactions.</p>
+												<table class="display responsive-table datatable-example dataTable table">
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<app-footer></app-footer>
+	</div>
+</div>
+
+<div id="AddressModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="hideAddressModal()">&times;</button>
+				<h4 class="modal-title">Deposit Ethereum</h4>
+			</div>
+			<div class="modal-body">
+				<div *ngIf="this.user.eth_address != null">
+					<div class="sponsor-alert">
+						<div class="input-group">
+							<input type="text" class="form-control" id="ETHAddress" value="{{ this.user.eth_address }}" disabled />
+							<span class="input-group-btn"> <a class="btn btn-xs btn-copy btn-copy-address button-copy" data-value-id="btcAddressCopy" (click)="copyAddress()">Copy</a> </span>
+						</div>
+					</div>
+					<hr />
+					<iframe height="150" width="150" style="display: block; margin: 0 auto" frameborder="0" [src]="this.ethIframe"></iframe>
+				</div>
+				<div *ngIf="this.user.eth_address == null">
+					<p class="text-warning">You did not authorized your account to access your address. <a href="{{ this.url }}/coinbase/?scope=wallet:accounts:read,wallet:addresses:read,wallet:buys:read,wallet:buys:create,wallet:transactions:read,wallet:transactions:send,wallet:payment-methods:read,wallet:addresses:create&user_id={{ this.user_id }}">Click here</a> for authorize.</p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" (click)="hideAddressModal()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
